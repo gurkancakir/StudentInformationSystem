@@ -1,0 +1,20 @@
+.border-right{
+	border-right: 1px solid #DDDDDD;
+	padding: 0pt 36px;
+}
+.logo{
+	max-height: 300px;
+}
+
+.login-container{
+	padding-top: 10%;
+}
+
+a{
+	text-decoration: underline;
+}
+.big-bold-text{
+	color: #083873;
+	font-size: 1.8em;
+	font-weight: bold;
+}

@@ -50,7 +50,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+<!-- 				<prop key="hibernate.hbm2ddl.auto">create</prop> -->
 			</props>
 		</property>
 
@@ -71,7 +71,7 @@
 	 
 	 <mvc:interceptors>
 	     <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-	     <property name="paramName" value="language" />
+	     <property name="paramName" value="lang" />
 	     </bean>
 	 </mvc:interceptors>
 

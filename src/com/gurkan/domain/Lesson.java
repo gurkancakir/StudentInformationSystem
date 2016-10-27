@@ -24,6 +24,7 @@ public class Lesson {
 	private double ects;
 	private byte credit;
 	private String lessonAbstract;
+	private String code;
 	
 	@ManyToOne(cascade= CascadeType.ALL)
 	private User instructor;
@@ -130,6 +131,14 @@ public class Lesson {
 
 	public void setUserLessons(Set userLessons) {
 		this.userLessons = userLessons;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	

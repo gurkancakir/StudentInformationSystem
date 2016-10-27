@@ -9,5 +9,6 @@
 	
 	<!-- bootstrap ve jqery icin js ve css ekleme islemi.. -->
 	<link rel="stylesheet" type="text/css" media="screen" href="resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="resources/css/main.css">
 
 </head>

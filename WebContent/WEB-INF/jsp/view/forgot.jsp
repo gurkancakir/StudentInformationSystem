@@ -9,12 +9,10 @@
 <!DOCTYPE html>
 <html>
 
-<template:header title="Login"></template:header>
+<template:header title="Forgot"></template:header>
 
 <body>
 <c:url var="actionURL" value="/login.check"/>
-<c:url var="forgotPassword" value="/forgot-password"/>
-
 <div class="container">
 <br />
 	<div align="right">
@@ -31,34 +29,23 @@
 				<img class="logo" align="right" alt="logo" src="http://bilecik.edu.tr/Tema/images/bLogo.jpg" />
 			</div>
 			<div class="col-md-5 col-xs-12">
-			    <span class="big-bold-text"><spring:message code="login.title"/></span>
+			    <span class="big-bold-text"><spring:message code="forgot.title"/></span>
 				<div class="login-container">
 					<form:form  modelAttribute="loginPerson" class="form-horizontal" method="post" action="${actionURL}">
 						<fieldset>
 						  <div class="form-group">
-						    <label for="email" class="col-sm-4 control-label"><spring:message code="login.email"/>:</label>
+						    <label for="email" class="col-sm-4 control-label"><spring:message code="forgot.email"/>:</label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" path="email" name="email" id="email" placeholder=<spring:message code="login.email"/>>
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="password" class="col-sm-4 control-label"><spring:message code="login.password"/>:</label>
-						    <div class="col-sm-8">
-						      <input type="password" class="form-control" path="password" name="password" id="password" placeholder=<spring:message code="login.password"/>>
+						      <input type="text" class="form-control" path="email" id="email" placeholder=<spring:message code="forgot.email"/>>
 						    </div>
 						  </div>
 						  
 						  <div class="form-group">
 						    <div class="col-sm-offset-9 col-sm-3">
-						      <button type="submit" align="right" style="min-width: 92px;" class="btn btn-default"><spring:message code="login.login"/></button>
+						      <button type="submit" align="right" style="min-width: 92px;" class="btn btn-default"><spring:message code="forgot.send"/></button>
 						    </div>
 						  </div>
 						  
-						  <div class="form-group">
-						    <div class="col-sm-offset-1 col-sm-11">
-						      <a href="${ forgotPassword }"><spring:message code="login.lost"/></a>
-						    </div>
-						  </div>
 						</fieldset>
 					</form:form>
 				</div>
