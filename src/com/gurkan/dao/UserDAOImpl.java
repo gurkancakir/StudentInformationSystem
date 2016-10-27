@@ -1,0 +1,67 @@
+package com.gurkan.dao;
+
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.gurkan.domain.User;
+
+@Repository
+public class UserDAOImpl implements ModelDAO<User> {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	private Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
+	}
+
+	@Override
+	public void insert(User user) {
+		Session session = getCurrentSession();
+		session.persist(user);
+		
+	}
+
+	@Override
+	public User getById(int id) {
+		Session session = getCurrentSession();
+		User user = session.get(User.class, id);
+		return user;
+	}
+
+	@Override
+	public List<User> getAll() {
+		Session session = getCurrentSession();
+		TypedQuery<User> query = session.createQuery("from User",User.class);
+		return query.getResultList();
+	}
+
+	@Override
+	public void update(User user) {
+		Session session = getCurrentSession();
+		session.update(user);
+		
+	}
+
+	@Override
+	public void delete(int id) {
+		Session session = getCurrentSession();
+		User u = (User) session.get(User.class, new Integer(id));
+		System.out.println(u);
+		if (u != null) {
+			session.delete(u);
+		}
+		
+	}
+	
+}
