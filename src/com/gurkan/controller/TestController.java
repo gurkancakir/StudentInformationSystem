@@ -17,7 +17,7 @@ public class TestController {
 	@Autowired
 	private RoleServiceImpl roleServiceImpl;
 	
-	@RequestMapping(value = "/roles", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getPersonList(Model model) {
 		
 		System.out.println("...getRoleList...");

@@ -27,6 +27,8 @@ public class User{
 	private String tcNo;
 	private boolean active;
 	private String avatar;
+	private String email;
+	private String password;
 	
 
 	@ManyToOne(cascade= CascadeType.ALL)
@@ -38,13 +40,6 @@ public class User{
     inverseJoinColumns =
     @JoinColumn(name = "lesson"))
 	private Set intructorRecord = new HashSet();
-	
-	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinTable(name = "user_department", joinColumns =
-    @JoinColumn(name = "user"),
-    inverseJoinColumns =
-    @JoinColumn(name = "department"))
-	private Set departmentRecord = new HashSet();
 	
 	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Department.class)
     @JoinTable(name = "userlesson_user", joinColumns =
@@ -130,20 +125,28 @@ public class User{
 		this.intructorRecord = intructorRecord;
 	}
 
-	public Set getDepartmentRecord() {
-		return departmentRecord;
-	}
-
-	public void setDepartmentRecord(Set departmentRecord) {
-		this.departmentRecord = departmentRecord;
-	}
-
 	public Set getUserLessonRecord() {
 		return userLessonRecord;
 	}
 
 	public void setUserLessonRecord(Set userLessonRecord) {
 		this.userLessonRecord = userLessonRecord;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override

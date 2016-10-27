@@ -32,9 +32,6 @@ public class Department {
     @JoinColumn(name = "lesson"))
 	private Set departmentRecord= new HashSet();
 	
-	@ManyToOne(cascade= CascadeType.ALL)
-	private User user;
-	
 	public Department() {
 		super();
 	}
@@ -74,14 +71,6 @@ public class Department {
 
 	public void setDepartmentRecord(Set departmentRecord) {
 		this.departmentRecord = departmentRecord;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 		
 	
