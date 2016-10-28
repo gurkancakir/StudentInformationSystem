@@ -56,7 +56,7 @@
 						  
 						  <div class="form-group">
 						    <div class="col-sm-offset-1 col-sm-11">
-						      <a href="${ forgotPassword }"><spring:message code="login.lost"/></a>
+						      <a class="underline" href="${ forgotPassword }"><spring:message code="login.lost"/></a>
 						    </div>
 						  </div>
 						</fieldset>
