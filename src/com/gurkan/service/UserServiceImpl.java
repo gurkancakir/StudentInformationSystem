@@ -44,5 +44,14 @@ public class UserServiceImpl implements ModelService<User>{
 	public void delete(int id) {
 		userDAOImpl.delete(id);
 	}
+	
+	@Transactional
+	public int login(String email, String password){
+		return userDAOImpl.login(email, password);
+	}
 
+	@Transactional
+	public User forgot(String email){
+		return userDAOImpl.forgot(email);
+	}
 }

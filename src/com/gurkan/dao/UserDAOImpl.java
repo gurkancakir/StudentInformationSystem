@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,33 @@ public class UserDAOImpl implements ModelDAO<User> {
 			session.delete(u);
 		}
 		
+	}
+	
+	public int login(String email,String password){
+		Session session = getCurrentSession();
+		String hql = "Select log.id from User log where log.email=:email and log.password=:password";
+		Query query = session.createQuery(hql);
+        query.setParameter("email", email);
+        query.setParameter("password", password);
+        List result = query.list();
+		if (result.size() > 0){
+			return (int)result.get(0);
+		}else{
+			return 0;
+		}
+	}
+	
+	public User forgot(String email){
+		Session session = getCurrentSession();
+		String hql = "Select log from User log where log.email=:email";
+		Query query = session.createQuery(hql);
+        query.setParameter("email", email);
+        List result = query.list();
+		if (result.size() > 0){
+			return (User)result.get(0);
+		}else{
+			return null;
+		}
 	}
 	
 }
