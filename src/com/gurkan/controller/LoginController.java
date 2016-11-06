@@ -42,7 +42,7 @@ public class LoginController {
 			return "view/login";
 		}else{
 			model.addAttribute("user", userServiceImpl.getById(userId));
-			return "view/home";
+			return "view/instructor/home";
 		}
 	}
 	
