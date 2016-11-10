@@ -39,6 +39,7 @@
 		<jpa.version>2.1.0</jpa.version>
 		<eclipselink.version>2.6.1</eclipselink.version>
 		<hibernate.version>5.2.0.Final</hibernate.version>
+		<spring.security.version>3.2.3.RELEASE</spring.security.version>
 	</properties>
 
 
@@ -162,6 +163,26 @@
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
 			<version>${eclipselink.version}</version>
+		</dependency>
+		
+		<!-- Spring Security JSP Taglib -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
 		</dependency>
 
 		<!-- oracle dependency -->

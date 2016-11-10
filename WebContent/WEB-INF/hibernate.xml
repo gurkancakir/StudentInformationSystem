@@ -40,6 +40,11 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
+	
+
+	<bean id="myUserDetailsService"
+                class="com.gurkan.service.MyUserDetailsService">
+	</bean>
 
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">

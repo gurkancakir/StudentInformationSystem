@@ -31,9 +31,9 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="instructor/logout" data-toggle="ajaxModal" ><spring:message code="topmenu.instructor.logout"/></a>
+              <a href="javascript:formSubmit()"><spring:message code="topmenu.instructor.logout"/></a>
             </li>
           </ul>
         </li>
-      </ul>      
+      </ul>     
     </header>

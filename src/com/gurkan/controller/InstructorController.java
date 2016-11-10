@@ -14,7 +14,7 @@ public class InstructorController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 	
-	@RequestMapping(value = "/instructor", method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/instructor"}, method = RequestMethod.GET)
 	public String loginPage(Model model) {
 		
 		System.out.println("instructor");

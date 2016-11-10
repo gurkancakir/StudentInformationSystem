@@ -12,12 +12,19 @@
 
 <body>
 <c:url var="actionURL" value="/login"/>
+<c:url var="actionJSecurity" value='/j_spring_security_check' />
 <c:url var="forgotPassword" value="/forgot-password"/>
 
 <c:set var="error" value="${ error }"/> 
 <c:if test="${ !empty error}">
 	<c:set var="code" value="${ error.code }" />
 	<spring:message var="message" code="${ error.errors }" />
+</c:if>
+
+<c:set var="msg" value="${ msg }"/> 
+<c:if test="${ !empty msg}">
+	<c:set var="msgCode" value="${ msg.code }" />
+	<spring:message var="msgMessage" code="${ msg.errors }" />
 </c:if>
 
 <div class="container">
@@ -41,7 +48,7 @@
 			<div class="col-md-5 col-sm-5 col-xs-12">
 			    <span class="big-bold-text"><spring:message code="login.title"/></span>
 				<div class="login-container">
-					<form:form  modelAttribute="loginPerson" class="form-horizontal" method="post" action="${actionURL}">
+					<form:form  modelAttribute="loginPerson" class="form-horizontal" method="post" action="${ actionJSecurity}">
 						<fieldset>
 						  <div class="form-group">
 						    <label for="email" class="col-sm-4 control-label"><spring:message code="login.email"/>:</label>
@@ -67,6 +74,7 @@
 						      <a class="underline" href="${ forgotPassword }"><spring:message code="login.lost"/></a>
 						    </div>
 						  </div>
+						  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						</fieldset>
 					</form:form>
 				</div>
@@ -80,6 +88,9 @@
 <script type="text/javascript">
 	if ('<c:out value="${error}"/>' !== '')
 		toastr.error('<c:out value="${message}"/>','<c:out value="${code}"/>');
+	
+	if ('<c:out value="${msg}"/>' !== '')
+		toastr.success('<c:out value="${msgMessage}"/>','<c:out value="${msgCode}"/>');
 </script>
 </body>
 </html>

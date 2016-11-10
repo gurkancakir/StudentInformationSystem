@@ -2,7 +2,7 @@
 
 # roles
 insert into Role(id,title) values('1','Admin');
-insert into Role(id,title) values('2','Instructer');
+insert into Role(id,title) values('2','Instructor');
 insert into Role(id,title) values('3','Student');
 
 # users

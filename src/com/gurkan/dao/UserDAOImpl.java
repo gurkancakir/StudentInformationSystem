@@ -1,5 +1,6 @@
 package com.gurkan.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -90,6 +91,23 @@ public class UserDAOImpl implements ModelDAO<User> {
 		}else{
 			return null;
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public User findByEmail(String email) {
+		Session session = getCurrentSession();
+		List<User> users = new ArrayList<User>();
+
+		users = session
+			.createQuery("from User usr where usr.email=:email")
+			.setParameter("email", email).list();
+		
+		if (users.size() > 0) {
+			return users.get(0);
+		} else {
+			return null;
+		}
+
 	}
 	
 }
