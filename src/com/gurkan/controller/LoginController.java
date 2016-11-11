@@ -26,6 +26,30 @@ public class LoginController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView redirect(HttpServletRequest request) {
+
+		ModelAndView model = new ModelAndView();
+		
+		/*
+		 *  Role gore yonlendirme yapildi.
+		 * 
+		 * */
+		
+		if (request.isUserInRole("Admin")){
+			model.setViewName("redirect:/admin");
+		}else if (request.isUserInRole("Instructor")){
+			model.setViewName("redirect:/instructor");
+		}else if (request.isUserInRole("Student")){
+			model.setViewName("redirect:/student");			
+		}else {//not auth
+			model.setViewName("redirect:/login");
+		}	
+
+		return model;
+
+	}
+	
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView login() {
 

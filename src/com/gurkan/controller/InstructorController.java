@@ -15,7 +15,7 @@ public class InstructorController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 	
-	@RequestMapping(value = {"/","/instructor"}, method = RequestMethod.GET)
+	@RequestMapping(value = "/instructor", method = RequestMethod.GET)
 	public ModelAndView instructorHome() {
 		
 		ModelAndView model = new ModelAndView();

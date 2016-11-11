@@ -10,7 +10,7 @@
 	<template:content>
 		<jsp:attribute name="content">
 			<div class="row m-n">
-		      <div class="col-sm-4 col-sm-offset-4">
+		      <div class="col-sm-4 col-sm-offset-4 padding-top-10">
 		        <div class="text-center m-b-lg">
 		          <h1 class="h text-white animated fadeInDownBig">404</h1>
 		        </div>

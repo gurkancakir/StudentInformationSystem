@@ -75,8 +75,12 @@
 	if ('<c:out value="${error}"/>' !== '')
 		toastr.error('<c:out value="${message}"/>','<c:out value="${code}"/>');
 
-	if ('<c:out value="${success}"/>' !== '')
+	if ('<c:out value="${success}"/>' !== ''){
 		toastr.success('<c:out value="${body}"/>','<c:out value="${title}"/>');
+		setTimeout(function(){
+			window.location = "login";
+		},2000);//2 sn sonra login'e yonlendirme
+	}
 </script>
 
 </body>
