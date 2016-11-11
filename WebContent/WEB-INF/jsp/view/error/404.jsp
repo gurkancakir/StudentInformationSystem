@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 
-<template:header title="403"></template:header>
+<template:header title="404"></template:header>
 
 <body>
 	<template:content>
@@ -12,7 +12,7 @@
 			<div class="row m-n">
 		      <div class="col-sm-4 col-sm-offset-4">
 		        <div class="text-center m-b-lg">
-		          <h1 class="h text-white animated fadeInDownBig">403</h1>
+		          <h1 class="h text-white animated fadeInDownBig">404</h1>
 		        </div>
 		      </div>
 		    </div>

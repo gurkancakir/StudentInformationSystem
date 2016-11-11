@@ -19,7 +19,7 @@
             <span class="thumb-sm avatar pull-left">
               <img src="http://bilecik.edu.tr/Tema/images/bLogo.jpg">
             </span>
-            Doç.Dr. Cihan KARAKUZU <b class="caret"></b>
+            ${pageContext.request.userPrincipal.name} <b class="caret"></b>
           </a>
           <ul class="dropdown-menu animated fadeInRight">
             <span class="arrow top"></span>

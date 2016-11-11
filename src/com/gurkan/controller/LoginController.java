@@ -69,48 +69,35 @@ public class LoginController {
 		return error;
 	}
 
-		
-	
-	/*	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
-		
-		System.out.println("...login...");
-		System.out.println(email+" "+password);
-		User user = null;
-
-		int userId = userServiceImpl.login(email, password);
-		if ( userId == 0){
-			model.addAttribute("error", new BaseError("L01", "login.wrong"));
-			return "view/login";
-		}else{
-			model.addAttribute("user", userServiceImpl.getById(userId));
-			return "view/instructor/home";
-		}
-	}*/
 	
 	@RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
-	public String forgotPasswordPage(Model model) {
-		
+	public ModelAndView forgotPasswordPage() {
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/forgot");
 		System.out.println("forgot-password");
 		
-		return "view/forgot";
+		return model;
 	}
 	
 	@RequestMapping(value = "/forgot-password", method = RequestMethod.POST)
-	public String forgotPassword(@RequestParam("email") String email, Model model) {
+	public ModelAndView forgotPassword(@RequestParam("email") String email) {
 		
 		System.out.println("forgot-password");
 		System.out.println(email);
 		
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/forgot");
+		
 		User user = userServiceImpl.forgot(email);
 		if (user == null) {
-			model.addAttribute("error", new BaseError("F01", "forgot.wrong"));
+			model.addObject("error", new BaseError("F01", "forgot.wrong"));
 		}else {
-			model.addAttribute("success", new BaseSuccess("forgot.success.title", "forgot.success.body"));
+			model.addObject("success", new BaseSuccess("forgot.success.title", "forgot.success.body"));
 		}
 		
-		return "view/forgot";
+		return model;
 	}
 
 }

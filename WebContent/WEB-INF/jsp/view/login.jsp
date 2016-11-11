@@ -11,7 +11,6 @@
 <template:header title="Login"></template:header>
 
 <body>
-<c:url var="actionURL" value="/login"/>
 <c:url var="actionJSecurity" value='/j_spring_security_check' />
 <c:url var="forgotPassword" value="/forgot-password"/>
 
@@ -48,7 +47,7 @@
 			<div class="col-md-5 col-sm-5 col-xs-12">
 			    <span class="big-bold-text"><spring:message code="login.title"/></span>
 				<div class="login-container">
-					<form:form  modelAttribute="loginPerson" class="form-horizontal" method="post" action="${ actionJSecurity}">
+					<form:form class="form-horizontal" method="post" action="${ actionJSecurity}">
 						<fieldset>
 						  <div class="form-group">
 						    <label for="email" class="col-sm-4 control-label"><spring:message code="login.email"/>:</label>

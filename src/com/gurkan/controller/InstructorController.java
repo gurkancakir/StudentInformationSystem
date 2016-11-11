@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.gurkan.service.UserServiceImpl;
 
@@ -15,18 +16,23 @@ public class InstructorController {
 	private UserServiceImpl userServiceImpl;
 	
 	@RequestMapping(value = {"/","/instructor"}, method = RequestMethod.GET)
-	public String loginPage(Model model) {
+	public ModelAndView instructorHome() {
 		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/instructor/home");
 		System.out.println("instructor");
 		
-		return "view/instructor/home";
+		return model;
 	}
 
 	@RequestMapping(value = "/instructor/messages", method = RequestMethod.GET)
-	public String messagesPage(Model model) {
+	public ModelAndView messagesPage() {
 		
 		System.out.println("messages");
 		
-		return "view/instructor/messages";
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/instructor/messages");
+		
+		return model;
 	}
 }

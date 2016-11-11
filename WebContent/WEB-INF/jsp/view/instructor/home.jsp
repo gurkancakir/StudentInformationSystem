@@ -9,8 +9,10 @@
 
 <!DOCTYPE html>
 <html class="app js no-touch no-android no-chrome firefox no-iemobile no-ie no-ie10 no-ie11 no-ios">
+
 <spring:message var="home" code="leftmenu.instructor.home" />
 <template:header title="${ home }"></template:header>
+
 <body>
 <section class="vbox">
 	<template:top_menu></template:top_menu>
