@@ -22,7 +22,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
         }else if(role.contains("Student")) {
             targetUrl = "/student";
         }else
-        	targetUrl = "/";
+        	targetUrl = "/login";
         
         return targetUrl;
     }

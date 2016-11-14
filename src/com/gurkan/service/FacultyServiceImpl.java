@@ -32,6 +32,11 @@ public class FacultyServiceImpl implements ModelService<Faculty>{
 	public List<Faculty> getAll() {
 		return facultyDAOImpl.getAll();
 	}
+	
+	@Transactional 
+	public List<Faculty> getAllWithPagination(int offset, int noOfRecords) {
+		return facultyDAOImpl.getAllWithPagination(offset,noOfRecords);
+	}
 
 	@Override
 	@Transactional 

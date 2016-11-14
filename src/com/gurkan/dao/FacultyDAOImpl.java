@@ -45,6 +45,15 @@ public class FacultyDAOImpl implements ModelDAO<Faculty>{
 		TypedQuery<Faculty> query = session.createQuery("from Faculty",Faculty.class);
 		return query.getResultList();
 	}
+	
+	
+	public List<Faculty> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<Faculty> query = session.createQuery("from Faculty",Faculty.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
+	}
 
 	@Override
 	public void update(Faculty item) {
