@@ -45,4 +45,9 @@ public class UserLessonServiceImpl implements ModelService<UserLesson>{
 		userLessonDAOImpl.delete(id);
 	}
 
+	@Override
+	public List<UserLesson> getAllWithPagination(int offset, int noOfRecords) {
+		return userLessonDAOImpl.getAllWithPagination(offset, noOfRecords);
+	}
+
 }

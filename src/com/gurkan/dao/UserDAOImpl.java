@@ -109,5 +109,14 @@ public class UserDAOImpl implements ModelDAO<User> {
 		}
 
 	}
+
+	@Override
+	public List<User> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<User> query = session.createQuery("from User",User.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
+	}
 	
 }

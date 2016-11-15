@@ -44,4 +44,10 @@ public class RoleServiceImpl implements ModelService<Role>{
 	public void delete(int id) {
 		roleDAOImpl.delete(id);
 	}
+
+	@Override
+	@Transactional 
+	public List<Role> getAllWithPagination(int offset, int noOfRecords) {
+		return roleDAOImpl.getAllWithPagination(offset, noOfRecords);
+	}
 }

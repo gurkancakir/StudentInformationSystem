@@ -54,4 +54,10 @@ public class UserServiceImpl implements ModelService<User>{
 	public User forgot(String email){
 		return userDAOImpl.forgot(email);
 	}
+	
+	@Override
+	@Transactional 
+	public List<User> getAllWithPagination(int offset, int noOfRecords) {
+		return userDAOImpl.getAllWithPagination(offset,noOfRecords);
+	}
 }

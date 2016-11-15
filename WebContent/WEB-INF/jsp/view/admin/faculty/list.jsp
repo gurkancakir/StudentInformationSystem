@@ -15,6 +15,8 @@
 
 <c:url var="addUrl" value="/admin/faculty/add" />
 <c:url var="pageUrl" value="/admin/faculty/?page=" />
+<c:url var="deleteUrl" value="/admin/faculty/delete/" />
+<c:url var="updateUrl" value="/admin/faculty/update/" />
 
 <body>
 <section class="vbox">
@@ -39,10 +41,11 @@
 				                  </div>
 				                </div>
 				                <div class="table-responsive">
-				                  <table class="table table-striped b-t b-light">
+				                  <table class="table table-hover table-striped b-t b-light">
 				                    <thead>
 				                        <th><spring:message code="faculty.list.id" /></th>
 				                        <th><spring:message code="faculty.list.name" /></th>
+				                        <th><spring:message code="faculty.list.operation" /></th>
 				                      </tr>
 				                    </thead>
 				                    <tbody id="tbody">
@@ -50,8 +53,17 @@
 									      <tr>
 					                        <td><c:out value="${faculty.id }" /></td>
 					                        <td><c:out value="${faculty.name }" /></td>
+					                        <td><a class="btn btn-sm btn-info" href="${ updateUrl.concat(faculty.id) }"><spring:message code="faculty.list.updateButton" /></a> 
+					                        <a class="btn btn-sm btn-danger" href="${ deleteUrl.concat(faculty.id) }"><spring:message code="faculty.list.deleteButton" /></a> </td>
 					                      </tr>
 									  </c:forEach>
+									  <c:if test="${ empty facultyList}">
+									  	<tr>
+									  		<td colspan="3" align="center">
+									  			<b><spring:message code="error.recordsNotFound" /></b>
+									  		</td>
+									  	</tr>
+									  </c:if>
 				                    </tbody>
 				                  </table>
 				                </div>
@@ -65,7 +77,7 @@
 				                        <c:forEach var="i" begin="1" end="${totalPage }">
 										   <li><a href="${pageUrl.concat(i)}"><c:out value="${i}"/></a></li>
 										</c:forEach>
-										<c:if test="${currentPage != totalPage}">
+										<c:if test="${currentPage != totalPage && totalPage != 0}">
 				                        	<li><a href="${pageUrl.concat(currentPage+1) }"><i class="fa fa-chevron-right"></i></a></li>
 				                      	</c:if>
 				                      </ul>

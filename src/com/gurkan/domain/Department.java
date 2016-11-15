@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,10 +20,12 @@ public class Department {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
+	@Column(name="department_id")
 	private int id;
 	private String name;
 	
 	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name = "facultyId")
 	private Faculty faculty;
 	
 	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)

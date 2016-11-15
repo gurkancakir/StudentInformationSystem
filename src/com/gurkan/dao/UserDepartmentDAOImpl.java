@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.gurkan.domain.User;
 import com.gurkan.domain.UserDepartment;
 
 @Repository
@@ -60,6 +59,15 @@ public class UserDepartmentDAOImpl implements ModelDAO<UserDepartment>{
 		if (u != null){
 			session.delete(u);
 		}
+	}
+
+	@Override
+	public List<UserDepartment> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<UserDepartment> query = session.createQuery("from UserDepartment",UserDepartment.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
 	}
 	
 

@@ -62,4 +62,13 @@ public class SeasonDAOImpl implements ModelDAO<Season>{
 		}
 	}
 
+	@Override
+	public List<Season> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<Season> query = session.createQuery("from Season",Season.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
+	}
+
 }

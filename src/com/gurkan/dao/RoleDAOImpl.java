@@ -64,4 +64,13 @@ public class RoleDAOImpl implements ModelDAO<Role> {
 		
 	}
 
+	@Override
+	public List<Role> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<Role> query = session.createQuery("from Role",Role.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
+	}
+
 }

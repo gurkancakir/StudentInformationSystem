@@ -61,4 +61,13 @@ public class LessonDAOImpl implements ModelDAO<Lesson>{
 		}
 	}
 
+	@Override
+	public List<Lesson> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<Lesson> query = session.createQuery("from Lesson",Lesson.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
+	}
+
 }

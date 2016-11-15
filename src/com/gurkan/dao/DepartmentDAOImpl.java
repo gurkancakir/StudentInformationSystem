@@ -63,5 +63,14 @@ public class DepartmentDAOImpl implements ModelDAO<Department>{
 		}
 		
 	}
+
+	@Override
+	public List<Department> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<Department> query = session.createQuery("from Department",Department.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
+	}
 	
 }

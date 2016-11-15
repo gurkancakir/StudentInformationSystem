@@ -8,9 +8,9 @@
 
 	<!-- enable use-expressions -->
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/admin**" access="hasRole('Admin')" />
-		<intercept-url pattern="/instructor**" access="hasRole('Instructor')" />
-		<intercept-url pattern="/student**" access="hasRole('Student')" />
+		<intercept-url pattern="/admin/**" access="hasRole('Admin')" />
+		<intercept-url pattern="/instructor/**" access="hasRole('Instructor')" />
+		<intercept-url pattern="/student/**" access="hasRole('Student')" />
 		
 
 		<!-- access denied page -->

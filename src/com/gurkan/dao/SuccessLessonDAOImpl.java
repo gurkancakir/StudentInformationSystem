@@ -62,5 +62,14 @@ public class SuccessLessonDAOImpl implements ModelDAO<SuccessLesson> {
 			session.delete(s);
 		}
 	}
+
+	@Override
+	public List<SuccessLesson> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<SuccessLesson> query = session.createQuery("from SuccessLesson",SuccessLesson.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
+	}
 	
 }

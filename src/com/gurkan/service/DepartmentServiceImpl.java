@@ -45,4 +45,10 @@ public class DepartmentServiceImpl implements ModelService<Department>{
 		departmentDAOImpl.delete(id);		
 	}
 
+	@Override
+	@Transactional 
+	public List<Department> getAllWithPagination(int offset, int noOfRecords) {
+		return departmentDAOImpl.getAllWithPagination(offset, noOfRecords);
+	}
+
 }

@@ -10,5 +10,6 @@ public interface ModelDAO<T> {
 	public List<T> getAll();
 	public void update(T item);
 	public void delete(int id);
+	public List<T> getAllWithPagination(int offset, int noOfRecords);
 
 }

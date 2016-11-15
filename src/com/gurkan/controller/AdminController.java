@@ -4,26 +4,33 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gurkan.domain.Department;
 import com.gurkan.domain.Faculty;
+import com.gurkan.service.DepartmentServiceImpl;
 import com.gurkan.service.FacultyServiceImpl;
-import com.gurkan.service.UserServiceImpl;
 
 @Controller
 public class AdminController {
 	
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private DepartmentServiceImpl departmentServiceImpl;
 	
 	@Autowired
 	private FacultyServiceImpl facultyServiceImpl;
 	
+    private int recordsPerPage = 10;
+	
+	/*
+	 * Task : Admin Home Page
+	 * 
+	 */
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView adminHome() {
 		
@@ -33,11 +40,14 @@ public class AdminController {
 		return model;
 	}
 	
+	/*
+	 * Task : Faculty List Page With Pagination
+	 * 
+	 */
 	@RequestMapping(value = "/admin/faculty", method = RequestMethod.GET)
 	public ModelAndView facultyList(@RequestParam(value="page", required=false) Integer page) {
-		System.out.println(page);
+		
 		page = (page != null) ? page : 1;
-	    int recordsPerPage = 10;
 	    int totalSize = facultyServiceImpl.getAll().size();
 	    int totalPage =  0;
 	    if (totalSize % recordsPerPage == 0)
@@ -47,7 +57,7 @@ public class AdminController {
 	    List<Faculty> list = facultyServiceImpl.getAllWithPagination((page-1)*recordsPerPage, recordsPerPage);
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName("view/admin/facultyList");
+		model.setViewName("view/admin/faculty/list");
 		model.addObject("facultyList", list);
 		model.addObject("totalPage", totalPage);
 		model.addObject("currentPage", page);
@@ -55,14 +65,23 @@ public class AdminController {
 		return model;
 	}
 	
+	/*
+	 * Task : Faculty Add Page
+	 * 
+	 */
 	@RequestMapping(value = "/admin/faculty/add", method = RequestMethod.GET)
 	public ModelAndView facultyAdd() {
 		ModelAndView model = new ModelAndView();
-		model.setViewName("view/admin/facultyAdd");
+		model.setViewName("view/admin/faculty/add");
+		model.addObject("newFaculty", new Faculty());
 		
 		return model;
 	}
 	
+	/*
+	 * Task : Faculty Add Page With Submit
+	 * 
+	 */
 	@RequestMapping(value = "/admin/faculty/add", method = RequestMethod.POST)
 	public ModelAndView facultyAddSubmit(@ModelAttribute("newFaculty") Faculty faculty) {
 		//faculteyi ekle
@@ -73,4 +92,158 @@ public class AdminController {
 		
 		return model;
 	}
+	
+	/*
+	 * Task : Delete Faculty
+	 * 
+	 */
+	@RequestMapping(value = "/admin/faculty/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView facultyDelete(@PathVariable(value="id") final String id) {
+		facultyServiceImpl.delete(Integer.parseInt(id));
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/faculty");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update Faculty
+	 * 
+	 */
+	@RequestMapping(value = "/admin/faculty/update/{id}", method = RequestMethod.GET)
+	public ModelAndView facultyUpdate(@PathVariable(value="id") final String id) {
+	    Faculty faculty = facultyServiceImpl.getById(Integer.parseInt(id));
+	    System.out.println(faculty.getId() + " : "+ faculty.getName());
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/faculty/update");
+		model.addObject("updateFaculty", faculty);
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update Faculty With Submit
+	 * 
+	 */
+	@RequestMapping(value = "/admin/faculty/update/{id}", method = RequestMethod.POST)
+	public ModelAndView facultyUpdateSubmit(@ModelAttribute("updateFaculty") Faculty faculty,@PathVariable(value="id") final String id) {
+		//faculteyi guncelle
+		facultyServiceImpl.update(faculty);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/faculty");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Department List Page With Pagination
+	 * 
+	 */
+	@RequestMapping(value = "/admin/department", method = RequestMethod.GET)
+	public ModelAndView departmentList(@RequestParam(value="page", required=false) Integer page) {
+		
+		page = (page != null) ? page : 1;
+	    int totalSize = departmentServiceImpl.getAll().size();
+	    int totalPage =  0;
+	    if (totalSize % recordsPerPage == 0)
+	    	totalPage = totalSize / recordsPerPage;
+	    else
+	    	totalPage = totalSize / recordsPerPage +1;
+	    List<Department> list = departmentServiceImpl.getAllWithPagination((page-1)*recordsPerPage, recordsPerPage);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/department/list");
+		model.addObject("departmentList", list);
+		model.addObject("totalPage", totalPage);
+		model.addObject("currentPage", page);
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Department Add Page
+	 * 
+	 */
+	@RequestMapping(value = "/admin/department/add", method = RequestMethod.GET)
+	public ModelAndView departmentAdd() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/department/add");
+		
+		//fakulteleri listele
+		List<Faculty> faculty = facultyServiceImpl.getAll();
+		model.addObject("allFaculty",faculty);
+		model.addObject("newDepartment", new Department());
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Faculty Add Page With Submit
+	 * 
+	 */
+	@RequestMapping(value = "/admin/department/add", method = RequestMethod.POST)
+	public ModelAndView departmentAddSubmit(@ModelAttribute("newDepartment") Department department, @RequestParam("facultyId") Integer id) {
+		
+		if(id != -1){
+			departmentServiceImpl.insert(department);
+			System.out.println(id);
+			department.setFaculty(facultyServiceImpl.getById(id));
+			departmentServiceImpl.update(department);
+		}
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/department");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update Department
+	 * 
+	 */
+	@RequestMapping(value = "/admin/department/update/{id}", method = RequestMethod.GET)
+	public ModelAndView departmentUpdate(@PathVariable(value="id") final String id) {
+	    Department department = departmentServiceImpl.getById(Integer.parseInt(id));
+	    
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/department/update");
+		model.addObject("updateDepartment", department);
+		
+		//fakulteleri listele
+		List<Faculty> faculty = facultyServiceImpl.getAll();
+		model.addObject("allFaculty",faculty);
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update Department With Submit
+	 * 
+	 */
+	@RequestMapping(value = "/admin/department/update/{id}", method = RequestMethod.POST)
+	public ModelAndView departmentUpdateSubmit(@ModelAttribute("updateDepartment") Department department, @PathVariable(value="id") final String id) {
+		
+		departmentServiceImpl.update(department);
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/department");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Delete Department
+	 * 
+	 */
+	@RequestMapping(value = "/admin/department/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView departmentDelete(@PathVariable(value="id") final String id) {
+		departmentServiceImpl.delete(Integer.parseInt(id));
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/department");
+		
+		return model;
+	}
+	
+	
+	
 }

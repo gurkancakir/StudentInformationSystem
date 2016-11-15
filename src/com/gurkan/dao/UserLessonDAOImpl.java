@@ -60,5 +60,14 @@ public class UserLessonDAOImpl implements ModelDAO<UserLesson>{
 			session.delete(u);
 		}
 	}
+
+	@Override
+	public List<UserLesson> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<UserLesson> query = session.createQuery("from UserLesson",UserLesson.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
+	}
 	
 }

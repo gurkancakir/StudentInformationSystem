@@ -61,4 +61,13 @@ public class EvaluationDAOImpl implements ModelDAO<Evaluation>{
 		}
 	}
 
+	@Override
+	public List<Evaluation> getAllWithPagination(int offset, int noOfRecords) {
+		Session session = getCurrentSession();
+		TypedQuery<Evaluation> query = session.createQuery("from Evaluation",Evaluation.class);
+		query.setFirstResult(offset);
+		query.setMaxResults(noOfRecords);
+		return query.getResultList();
+	}
+
 }

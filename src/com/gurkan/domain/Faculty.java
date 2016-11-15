@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,16 +18,17 @@ import javax.persistence.OneToMany;
 public class Faculty {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	
-	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Department.class)
-    @JoinTable(name = "faculty_department", joinColumns =
-    @JoinColumn(name = "faculty"),
-    inverseJoinColumns =
-    @JoinColumn(name = "department"))
-	private Set userRecord= new HashSet();
+//	@OneToMany(mappedBy="departmentRecord",cascade=CascadeType.ALL)
+//	/*(cascade= CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Department.class)
+//    @JoinTable(joinColumns =
+//    @JoinColumn(name = "faculty_id"),
+//    inverseJoinColumns =
+//    @JoinColumn(name = "department_id"))*/
+//	private Set<Department> departmentRecord = new HashSet();
 	
 	public Faculty() {
 		super();
@@ -53,13 +55,13 @@ public class Faculty {
 		this.name = name;
 	}
 
-	public Set getUserRecord() {
-		return userRecord;
-	}
-
-	public void setUserRecord(Set userRecord) {
-		this.userRecord = userRecord;
-	}
+//	public Set getDepartmentRecord() {
+//		return departmentRecord;
+//	}
+//
+//	public void setDepartmentRecord(Set departmentRecord) {
+//		this.departmentRecord = departmentRecord;
+//	}
 	
 	
 }

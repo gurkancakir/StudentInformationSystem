@@ -44,5 +44,11 @@ public class LessonServiceImpl implements ModelService<Lesson>{
 	public void delete(int id) {
 		lessonDAOImpl.delete(id);
 	}
+
+	@Override
+	@Transactional 
+	public List<Lesson> getAllWithPagination(int offset, int noOfRecords) {
+		return lessonDAOImpl.getAllWithPagination(offset, noOfRecords);
+	}
 	
 }

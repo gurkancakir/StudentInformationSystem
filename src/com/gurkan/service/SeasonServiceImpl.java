@@ -44,5 +44,11 @@ public class SeasonServiceImpl implements ModelService<Season>{
 	public void delete(int id) {
 		seasonDAOImpl.delete(id);
 	}
+
+	@Override
+	@Transactional 
+	public List<Season> getAllWithPagination(int offset, int noOfRecords) {
+		return seasonDAOImpl.getAllWithPagination(offset, noOfRecords);
+	}
 	
 }

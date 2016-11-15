@@ -14,7 +14,7 @@
         <nav class="nav-primary hidden-xs">
           <ul class="nav">
             <li  class="active">
-              <a href="instructor" class="active">
+              <a href="admin" class="active">
                 <i class="fa fa-dashboard icon">
                   <b class="bg-danger"></b>
                 </i>
@@ -43,6 +43,32 @@
                   <a href="admin/faculty/add" >                                                        
                     <i class="fa fa-angle-right"></i>
                     <span><spring:message code="leftmenu.admin.faculty.add"/></span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li >
+              <a href="#department">
+                <i class="fa fa-columns icon">
+                  <b class="bg-warning"></b>
+                </i>
+                <span class="pull-right">
+                  <i class="fa fa-angle-down text"></i>
+                  <i class="fa fa-angle-up text-active"></i>
+                </span>
+                <span><spring:message code="leftmenu.admin.department"/></span>
+              </a>
+              <ul class="nav lt">
+                <li >
+                  <a href="admin/department/" >                                                        
+                    <i class="fa fa-angle-right"></i>
+                    <span><spring:message code="leftmenu.admin.department.list"/></span>
+                  </a>
+                </li>
+                <li >
+                  <a href="admin/department/add" >                                                        
+                    <i class="fa fa-angle-right"></i>
+                    <span><spring:message code="leftmenu.admin.department.add"/></span>
                   </a>
                 </li>
               </ul>

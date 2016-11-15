@@ -43,5 +43,11 @@ public class EvaluationServiceImpl implements ModelService<Evaluation>{
 	public void delete(int id) {
 		evaluationDAOImpl.delete(id);
 	}
+
+	@Override
+	@Transactional 
+	public List<Evaluation> getAllWithPagination(int offset, int noOfRecords) {
+		return evaluationDAOImpl.getAllWithPagination(offset, noOfRecords);
+	}
 	
 }

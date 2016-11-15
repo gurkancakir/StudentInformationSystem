@@ -35,7 +35,8 @@
 				                      <div class="panel-body">
 				                        <p class="text-muted"><spring:message code="faculty.add.inf" /></p>
 				                        <label><spring:message code="faculty.add.name" /></label>
-				                        <input id="name" path="name" name="name" type="text" class="form-control"/>
+				                        <form:hidden path="id"/>
+				                        <form:input id="name" path="name" name="name" type="text" class="form-control"/>
 				                      </div>
 				                      <footer class="panel-footer text-right bg-light lter">
 				                        <button type="submit" class="btn btn-success btn-s-xs"><spring:message code="faculty.add.submit" />
