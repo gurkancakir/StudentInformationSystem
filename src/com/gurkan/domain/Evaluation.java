@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Evaluation {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String value;

@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 public class UserDepartment {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private boolean active;
 	private Date startDate;

@@ -18,7 +18,7 @@ import javax.persistence.JoinColumn;
 public class Lesson {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private double ects;

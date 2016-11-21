@@ -18,7 +18,7 @@ import javax.persistence.ManyToMany;
 public class Season {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
 	private Date startDate;

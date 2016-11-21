@@ -17,7 +17,7 @@ import javax.persistence.JoinColumn;
 public class Role{
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
 	

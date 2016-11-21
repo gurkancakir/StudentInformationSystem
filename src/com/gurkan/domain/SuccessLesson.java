@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 public class SuccessLesson {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private byte avarage;
 	private String letterGrade;

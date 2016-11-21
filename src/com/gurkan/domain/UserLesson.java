@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 public class UserLesson {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@ManyToOne(cascade= CascadeType.ALL)

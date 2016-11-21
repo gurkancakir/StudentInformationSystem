@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 public class Department {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="department_id")
 	private int id;
 	private String name;
