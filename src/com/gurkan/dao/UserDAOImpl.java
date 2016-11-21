@@ -9,12 +9,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.gurkan.domain.User;
 
 @Repository
 public class UserDAOImpl implements ModelDAO<User> {
+	
 
 	@Autowired
 	private SessionFactory sessionFactory;

@@ -21,12 +21,12 @@ public class Role{
 	private int id;
 	private String title;
 	
-	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinTable(name = "role_users", joinColumns =
-    @JoinColumn(name = "role"),
-    inverseJoinColumns =
-    @JoinColumn(name = "user"))
-	private Set userRecord = new HashSet();
+//	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = User.class)
+//    @JoinTable(name = "role_users", joinColumns =
+//    @JoinColumn(name = "role"),
+//    inverseJoinColumns =
+//    @JoinColumn(name = "user"))
+//	private Set userRecord = new HashSet();
 	
 	public Role() {
 		super();
@@ -53,13 +53,13 @@ public class Role{
 		this.title = title;
 	}
 
-	public Set getUserRecord() {
-		return userRecord;
-	}
-
-	public void setUserRecord(Set userRecord) {
-		this.userRecord = userRecord;
-	}
+//	public Set getUserRecord() {
+//		return userRecord;
+//	}
+//
+//	public void setUserRecord(Set userRecord) {
+//		this.userRecord = userRecord;
+//	}
 	
 	@Override
 	public String toString() {

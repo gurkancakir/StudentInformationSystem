@@ -32,6 +32,7 @@ public class User{
 	
 
 	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name = "roleId")
 	private Role role;
 	
 	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)

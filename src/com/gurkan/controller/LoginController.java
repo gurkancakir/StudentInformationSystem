@@ -90,6 +90,7 @@ public class LoginController {
 		} else {
 			error = "Invalid username and password!\n"+exception.getMessage();
 		}*/
+		System.out.println(exception.getMessage());
 		return error;
 	}
 

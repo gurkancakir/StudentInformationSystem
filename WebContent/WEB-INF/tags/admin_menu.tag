@@ -73,6 +73,32 @@
                 </li>
               </ul>
             </li>
+             <li>
+              <a href="#user">
+                <i class="fa fa-columns icon">
+                  <b class="bg-warning"></b>
+                </i>
+                <span class="pull-right">
+                  <i class="fa fa-angle-down text"></i>
+                  <i class="fa fa-angle-up text-active"></i>
+                </span>
+                <span><spring:message code="leftmenu.admin.user"/></span>
+              </a>
+              <ul class="nav lt">
+                <li >
+                  <a href="admin/user/" >                                                        
+                    <i class="fa fa-angle-right"></i>
+                    <span><spring:message code="leftmenu.admin.user.list"/></span>
+                  </a>
+                </li>
+                <li >
+                  <a href="admin/user/add" >                                                        
+                    <i class="fa fa-angle-right"></i>
+                    <span><spring:message code="leftmenu.admin.user.add"/></span>
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </nav>
         <!-- / nav -->

@@ -13,8 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gurkan.domain.Department;
 import com.gurkan.domain.Faculty;
+import com.gurkan.domain.Role;
+import com.gurkan.domain.User;
 import com.gurkan.service.DepartmentServiceImpl;
 import com.gurkan.service.FacultyServiceImpl;
+import com.gurkan.service.RoleServiceImpl;
+import com.gurkan.service.UserServiceImpl;
 
 @Controller
 public class AdminController {
@@ -24,6 +28,12 @@ public class AdminController {
 	
 	@Autowired
 	private FacultyServiceImpl facultyServiceImpl;
+	
+	@Autowired
+	private RoleServiceImpl roleServiceImpl;
+	
+	@Autowired
+	private UserServiceImpl userServiceImpl;
 	
     private int recordsPerPage = 10;
 	
@@ -240,6 +250,114 @@ public class AdminController {
 		departmentServiceImpl.delete(Integer.parseInt(id));
 		ModelAndView model = new ModelAndView();
 		model.setViewName("redirect:/admin/department");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Users List Page With Pagination
+	 * 
+	 */
+	@RequestMapping(value = "/admin/user", method = RequestMethod.GET)
+	public ModelAndView usersList(@RequestParam(value="page", required=false) Integer page) {
+		
+		page = (page != null) ? page : 1;
+	    int totalSize = userServiceImpl.getAll().size();
+	    int totalPage =  0;
+	    if (totalSize % recordsPerPage == 0)
+	    	totalPage = totalSize / recordsPerPage;
+	    else
+	    	totalPage = totalSize / recordsPerPage +1;
+	    List<User> list = userServiceImpl.getAllWithPagination((page-1)*recordsPerPage, recordsPerPage);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/user/list");
+		model.addObject("userList", list);
+		model.addObject("totalPage", totalPage);
+		model.addObject("currentPage", page);
+		
+		return model;
+	}
+	
+	/*
+	 * Task : User Add Page
+	 * 
+	 */
+	@RequestMapping(value = "/admin/user/add", method = RequestMethod.GET)
+	public ModelAndView userAdd() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/user/add");
+		
+		//Rolleri listele
+		List<Role> role = roleServiceImpl.getAll();
+		model.addObject("allRole",role);
+		model.addObject("newUser", new User());
+		
+		return model;
+	}
+	
+	/*
+	 * Task : User Add Page With Submit
+	 * 
+	 */
+	@RequestMapping(value = "/admin/user/add", method = RequestMethod.POST)
+	public ModelAndView userAddSubmit(@ModelAttribute("newUser") User user, @RequestParam("roleId") Integer id) {
+		
+		if(id != -1){
+			userServiceImpl.insert(user);
+			System.out.println(id);
+			user.setRole(roleServiceImpl.getById(id));
+			userServiceImpl.update(user);
+		}
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/user");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update User
+	 * 
+	 */
+	@RequestMapping(value = "/admin/user/update/{id}", method = RequestMethod.GET)
+	public ModelAndView userUpdate(@PathVariable(value="id") final String id) {
+	    User user = userServiceImpl.getById(Integer.parseInt(id));
+	    
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/user/update");
+		model.addObject("updateUser", user);
+		
+		//Rolleri listele
+		List<Role> role = roleServiceImpl.getAll();
+		model.addObject("allRole",role);
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update Department With Submit
+	 * 
+	 */
+	@RequestMapping(value = "/admin/user/update/{id}", method = RequestMethod.POST)
+	public ModelAndView userUpdateSubmit(@ModelAttribute("updateUser") User user, @PathVariable(value="id") final String id) {
+		
+		userServiceImpl.update(user);
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/user");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Delete User
+	 * 
+	 */
+	@RequestMapping(value = "/admin/user/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView userDelete(@PathVariable(value="id") final String id) {
+		userServiceImpl.delete(Integer.parseInt(id));
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/user");
 		
 		return model;
 	}
