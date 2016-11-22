@@ -13,10 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gurkan.domain.Department;
 import com.gurkan.domain.Faculty;
+import com.gurkan.domain.Lesson;
 import com.gurkan.domain.Role;
 import com.gurkan.domain.User;
 import com.gurkan.service.DepartmentServiceImpl;
 import com.gurkan.service.FacultyServiceImpl;
+import com.gurkan.service.LessonServiceImpl;
 import com.gurkan.service.RoleServiceImpl;
 import com.gurkan.service.UserServiceImpl;
 
@@ -34,6 +36,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserServiceImpl userServiceImpl;
+	
+	@Autowired
+	private LessonServiceImpl lessonServiceImpl;
 	
     private int recordsPerPage = 10;
 	
@@ -345,7 +350,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/admin/user/update/{id}", method = RequestMethod.POST)
 	public ModelAndView userUpdateSubmit(@ModelAttribute("updateUser") User user, @PathVariable(value="id") final String id, @RequestParam("roleId") Integer roleId,@RequestParam("file") String file) {
-		System.out.println(file);
+		System.out.println(file);//test
 		user.setRole(roleServiceImpl.getById(roleId));
 		userServiceImpl.update(user);
 		ModelAndView model = new ModelAndView();
@@ -366,6 +371,32 @@ public class AdminController {
 		
 		return model;
 	}
+	
+	/*
+	 * Task : Lesson List Page With Pagination
+	 * 
+	 */
+	@RequestMapping(value = "/admin/lesson", method = RequestMethod.GET)
+	public ModelAndView lessonList(@RequestParam(value="page", required=false) Integer page) {
+		
+		page = (page != null) ? page : 1;
+	    int totalSize = lessonServiceImpl.getAll().size();
+	    int totalPage =  0;
+	    if (totalSize % recordsPerPage == 0)
+	    	totalPage = totalSize / recordsPerPage;
+	    else
+	    	totalPage = totalSize / recordsPerPage +1;
+	    List<Lesson> list = lessonServiceImpl.getAllWithPagination((page-1)*recordsPerPage, recordsPerPage);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/lesson/list");
+		model.addObject("lessonList", list);
+		model.addObject("totalPage", totalPage);
+		model.addObject("currentPage", page);
+		
+		return model;
+	}
+	
 	
 	
 	

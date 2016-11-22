@@ -70,7 +70,8 @@ public class FacultyDAOImpl implements ModelDAO<Faculty>{
 		if (f != null){
 			//bolumlerin faculteleri null yapilmasi
 			for (Department dep : session.createQuery("from Department",Department.class).getResultList())
-				dep.setFaculty(null);
+				if (dep.getFaculty() != null && dep.getFaculty().getId() == f.getId())
+					dep.setFaculty(null);
 			session.delete(f);
 		}
 	}

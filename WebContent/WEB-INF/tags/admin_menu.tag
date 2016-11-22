@@ -50,7 +50,7 @@
             <li >
               <a href="#department">
                 <i class="fa fa-columns icon">
-                  <b class="bg-warning"></b>
+                  <b class="bg-info"></b>
                 </i>
                 <span class="pull-right">
                   <i class="fa fa-angle-down text"></i>
@@ -73,10 +73,10 @@
                 </li>
               </ul>
             </li>
-             <li>
+            <li>
               <a href="#user">
-                <i class="fa fa-columns icon">
-                  <b class="bg-warning"></b>
+                <i class="fa fa-users icon">
+                  <b class="bg-danger"></b>
                 </i>
                 <span class="pull-right">
                   <i class="fa fa-angle-down text"></i>
@@ -95,6 +95,32 @@
                   <a href="admin/user/add" >                                                        
                     <i class="fa fa-angle-right"></i>
                     <span><spring:message code="leftmenu.admin.user.add"/></span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#lesson">
+                <i class="fa fa-book icon">
+                  <b class="bg-success"></b>
+                </i>
+                <span class="pull-right">
+                  <i class="fa fa-angle-down text"></i>
+                  <i class="fa fa-angle-up text-active"></i>
+                </span>
+                <span><spring:message code="leftmenu.admin.lesson"/></span>
+              </a>
+              <ul class="nav lt">
+                <li >
+                  <a href="admin/lesson/" >                                                        
+                    <i class="fa fa-angle-right"></i>
+                    <span><spring:message code="leftmenu.admin.lesson.list"/></span>
+                  </a>
+                </li>
+                <li >
+                  <a href="admin/lesson/add" >                                                        
+                    <i class="fa fa-angle-right"></i>
+                    <span><spring:message code="leftmenu.admin.lesson.add"/></span>
                   </a>
                 </li>
               </ul>

@@ -69,7 +69,7 @@
 				                        </div>
 				                        <div class="col-md-6">
 				                        	<label><spring:message code="user.update.tcNo" /></label><br />
-				                        	<form:input id="tcNo" path="tcNo" name="tcNo" type="text" length="11" class="form-control"/>
+				                        	<form:input id="tcNo" path="tcNo" name="tcNo" type="text" maxlength="11" class="form-control"/>
 				                        </div>
 				                        <div class="col-sm-6">
 				                        	<label><spring:message code="user.update.active" /></label><br />

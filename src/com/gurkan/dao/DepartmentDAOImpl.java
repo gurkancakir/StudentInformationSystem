@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gurkan.domain.Department;
+import com.gurkan.domain.Lesson;
 
 @Repository
 public class DepartmentDAOImpl implements ModelDAO<Department>{
@@ -59,6 +60,10 @@ public class DepartmentDAOImpl implements ModelDAO<Department>{
 		Department d = (Department) session.get(Department.class, new Integer(id));
 		System.out.println(d);
 		if (d != null) {
+			//derslerin bolumleri null yapilmasi
+			for (Lesson lesson : session.createQuery("from Lesson",Lesson.class).getResultList())
+				if (lesson.getDepartment() != null && lesson.getDepartment().getId() == d.getId())
+					lesson.setDepartment(null);
 			session.delete(d);
 		}
 		
