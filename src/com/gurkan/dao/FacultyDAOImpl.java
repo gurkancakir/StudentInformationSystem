@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gurkan.domain.Department;
 import com.gurkan.domain.Faculty;
 
 @Repository
@@ -67,6 +68,9 @@ public class FacultyDAOImpl implements ModelDAO<Faculty>{
 		Faculty f = session.get(Faculty.class, id);
 		System.out.println(f);
 		if (f != null){
+			//bolumlerin faculteleri null yapilmasi
+			for (Department dep : session.createQuery("from Department",Department.class).getResultList())
+				dep.setFaculty(null);
 			session.delete(f);
 		}
 	}
