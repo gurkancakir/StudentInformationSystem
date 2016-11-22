@@ -26,10 +26,13 @@ public class Lesson {
 	private String lessonAbstract;
 	private String code;
 	
-	@ManyToOne(cascade= CascadeType.REFRESH)
+
+	@ManyToOne
+	@JoinColumn(name = "instructorId", insertable = true, updatable = true, nullable=true)
 	private User instructor;
 	
-	@ManyToOne(cascade= CascadeType.REFRESH)
+	@ManyToOne
+	@JoinColumn(name = "departmentId", insertable = true, updatable = true, nullable=true)
 	private Department department;
 	
 	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Season.class)
