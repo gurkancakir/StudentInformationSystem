@@ -306,7 +306,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/admin/user/add", method = RequestMethod.POST)
 	public ModelAndView userAddSubmit(@ModelAttribute("newUser") User user, @RequestParam("roleId") Integer id) {
-		
+
 		if(id != -1){
 			userServiceImpl.insert(user);
 			System.out.println(id);
@@ -344,8 +344,9 @@ public class AdminController {
 	 * 
 	 */
 	@RequestMapping(value = "/admin/user/update/{id}", method = RequestMethod.POST)
-	public ModelAndView userUpdateSubmit(@ModelAttribute("updateUser") User user, @PathVariable(value="id") final String id) {
-		
+	public ModelAndView userUpdateSubmit(@ModelAttribute("updateUser") User user, @PathVariable(value="id") final String id, @RequestParam("roleId") Integer roleId,@RequestParam("file") String file) {
+		System.out.println(file);
+		user.setRole(roleServiceImpl.getById(roleId));
 		userServiceImpl.update(user);
 		ModelAndView model = new ModelAndView();
 		model.setViewName("redirect:/admin/user");

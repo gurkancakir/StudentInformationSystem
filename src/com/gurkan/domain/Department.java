@@ -29,12 +29,12 @@ public class Department {
 	@JoinColumn(name = "facultyId", insertable = true, updatable = true, nullable=true)
 	private Faculty faculty;
 	
-	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
-    @JoinTable(name = "department_lesson", joinColumns =
-    @JoinColumn(name = "department"),
-    inverseJoinColumns =
-    @JoinColumn(name = "lesson"))
-	private Set departmentRecord= new HashSet();
+//	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
+//    @JoinTable(name = "department_lesson", joinColumns =
+//    @JoinColumn(name = "department"),
+//    inverseJoinColumns =
+//    @JoinColumn(name = "lesson"))
+//	private Set departmentRecord= new HashSet();
 	
 	public Department() {
 		super();
@@ -69,13 +69,13 @@ public class Department {
 		this.faculty = faculty;
 	}
 
-	public Set getDepartmentRecord() {
-		return departmentRecord;
-	}
-
-	public void setDepartmentRecord(Set departmentRecord) {
-		this.departmentRecord = departmentRecord;
-	}
+//	public Set getDepartmentRecord() {
+//		return departmentRecord;
+//	}
+//
+//	public void setDepartmentRecord(Set departmentRecord) {
+//		this.departmentRecord = departmentRecord;
+//	}
 	
 	@Override
 	public String toString() {

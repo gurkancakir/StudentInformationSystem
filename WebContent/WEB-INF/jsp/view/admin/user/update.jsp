@@ -39,11 +39,8 @@
 											<select class="form-control" id="roleId" name="roleId">
 												<option value="-1"><spring:message code="dropdown.default" /></option>
 												 <c:forEach var="role" items="${allRole}">
-												 	<option value="<c:out value='${role.id }' />"><c:out value="${role.title}"></c:out></option>
-												 </c:forEach>
-												 <c:forEach var="role" items="${allRole}">
 												 	<c:choose>
-													  <c:when test="${updateUser.role.id == role.id}">
+													  <c:when test="${updateUser.role != null && updateUser.role.id == role.id}">
 												 		<option selected value="<c:out value='${role.id }' />"><c:out value="${role.title}"></c:out></option>
 													  </c:when>    
 													  <c:otherwise>
@@ -77,13 +74,20 @@
 				                        <div class="col-sm-6">
 				                        	<label><spring:message code="user.update.active" /></label><br />
 					                        <label class="switch">
-					                          <input type="checkbox" name="active" id="active">
+					                          <c:choose>
+					                          	<c:when test="${updateUser.active == true }">
+					                          		<input type="checkbox" path="active"  checked="checked" name="active" id="active">
+					                          	</c:when>
+					                          	<c:otherwise>
+					                          		<input type="checkbox" path="active" name="active" id="active">
+					                          	</c:otherwise>
+					                          </c:choose>
 					                          <span></span>
 					                        </label>
 					                    </div>
 					                    <div class="col-md-12">
 					                    	<label><spring:message code="user.update.avatar" /></label>
-					                    	<input type="file" class="filestyle" data-icon="false" accept=".png,.PNG,.JPEG,.jpg" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
+					                    	<input type="file" name="file" id="file" class="filestyle" data-icon="false" accept=".png,.PNG,.JPEG,.jpg" data-classButton="btn btn-default" data-classInput="form-control inline input-s">
 					                    </div>
 				                      </div>
 				                      <footer class="panel-footer text-right bg-light lter">

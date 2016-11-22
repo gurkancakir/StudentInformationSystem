@@ -67,7 +67,7 @@
 				                        <div class="col-sm-6">
 				                        	<label><spring:message code="user.add.active" /></label><br />
 					                        <label class="switch">
-					                          <input type="checkbox" name="active" id="active">
+					                          <input type="checkbox" path="active" name="active" id="active">
 					                          <span></span>
 					                        </label>
 					                    </div>

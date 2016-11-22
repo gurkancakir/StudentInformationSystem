@@ -17,6 +17,7 @@ import com.gurkan.domain.User;
 @Repository
 public class UserDAOImpl implements ModelDAO<User> {
 	
+	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -32,6 +33,7 @@ public class UserDAOImpl implements ModelDAO<User> {
 	@Override
 	public void insert(User user) {
 		Session session = getCurrentSession();
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		session.persist(user);
 		
 	}
@@ -53,6 +55,8 @@ public class UserDAOImpl implements ModelDAO<User> {
 	@Override
 	public void update(User user) {
 		Session session = getCurrentSession();
+		if (user.getPassword().length() < 60)
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 		session.update(user);
 		
 	}

@@ -36,19 +36,19 @@ public class User{
 	@JoinColumn(name = "roleId", insertable = true, updatable = true, nullable=true)
 	private Role role;
 	
-	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
-    @JoinTable(name = "instructor_lesson", joinColumns =
-    @JoinColumn(name = "instructor"),
-    inverseJoinColumns =
-    @JoinColumn(name = "lesson"))
-	private Set intructorRecord = new HashSet();
-	
-	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Department.class)
-    @JoinTable(name = "userlesson_user", joinColumns =
-    @JoinColumn(name = "user"),
-    inverseJoinColumns =
-    @JoinColumn(name = "userlesson"))
-	private Set userLessonRecord = new HashSet();
+//	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
+//    @JoinTable(name = "instructor_lesson", joinColumns =
+//    @JoinColumn(name = "instructor"),
+//    inverseJoinColumns =
+//    @JoinColumn(name = "lesson"))
+//	private Set intructorRecord = new HashSet();
+//	
+//	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Department.class)
+//    @JoinTable(name = "userlesson_user", joinColumns =
+//    @JoinColumn(name = "user"),
+//    inverseJoinColumns =
+//    @JoinColumn(name = "userlesson"))
+//	private Set userLessonRecord = new HashSet();
 	
 	public User() {
 		super();
@@ -119,21 +119,21 @@ public class User{
 		this.role = role;
 	}
 	
-	public Set getIntructorRecord() {
-		return intructorRecord;
-	}
-
-	public void setIntructorRecord(Set intructorRecord) {
-		this.intructorRecord = intructorRecord;
-	}
-
-	public Set getUserLessonRecord() {
-		return userLessonRecord;
-	}
-
-	public void setUserLessonRecord(Set userLessonRecord) {
-		this.userLessonRecord = userLessonRecord;
-	}
+//	public Set getIntructorRecord() {
+//		return intructorRecord;
+//	}
+//
+//	public void setIntructorRecord(Set intructorRecord) {
+//		this.intructorRecord = intructorRecord;
+//	}
+//
+//	public Set getUserLessonRecord() {
+//		return userLessonRecord;
+//	}
+//
+//	public void setUserLessonRecord(Set userLessonRecord) {
+//		this.userLessonRecord = userLessonRecord;
+//	}
 
 	public String getEmail() {
 		return email;
