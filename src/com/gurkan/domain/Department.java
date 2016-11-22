@@ -24,7 +24,8 @@ public class Department {
 	private int id;
 	private String name;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+
+	@ManyToOne(cascade= CascadeType.REFRESH)
 	@JoinColumn(name = "facultyId")
 	private Faculty faculty;
 	
