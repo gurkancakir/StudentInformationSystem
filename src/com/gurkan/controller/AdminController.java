@@ -396,6 +396,101 @@ public class AdminController {
 		
 		return model;
 	}
+
+	/*
+	 * Task : Lesson Add Page
+	 *
+	 */
+	@RequestMapping(value = "/admin/lesson/add", method = RequestMethod.GET)
+	public ModelAndView lessonAdd() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/lesson/add");
+
+		List<Department> departments = departmentServiceImpl.getAll();
+		List<User> instructors = userServiceImpl.getAll();
+		for(int i=0; i< instructors.size(); i++)
+			if (instructors.get(i).getRole() == null || instructors.get(i).getRole().getId() != 2)
+				instructors.remove(i);
+		model.addObject("allInstructor",instructors);
+		model.addObject("allDepartment",departments);
+		model.addObject("newLesson", new Lesson());
+
+		return model;
+	}
+	
+	/*
+	 * Task : Lesson Add Page With Submit
+	 * 
+	 */
+	@RequestMapping(value = "/admin/lesson/add", method = RequestMethod.POST)
+	public ModelAndView lessonAddSubmit(@ModelAttribute("newLesson") Lesson lesson, @RequestParam("departmentId") Integer depId, @RequestParam("instructorId") Integer insId) {
+		
+		if (depId != -1 && insId != -1){
+			lesson.setDepartment(departmentServiceImpl.getById(depId));
+			lesson.setInstructor(userServiceImpl.getById(insId));
+		}
+		lessonServiceImpl.insert(lesson);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/lesson");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update Lesson
+	 * 
+	 */
+	@RequestMapping(value = "/admin/lesson/update/{id}", method = RequestMethod.GET)
+	public ModelAndView lessonUpdate(@PathVariable(value="id") final String id) {
+	    Lesson lesson = lessonServiceImpl.getById(Integer.parseInt(id));
+	    
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/lesson/update");
+		model.addObject("updateLesson", lesson);
+		
+		List<Department> departments = departmentServiceImpl.getAll();
+		List<User> instructors = userServiceImpl.getAll();
+		for(int i=0; i< instructors.size(); i++)
+			if (instructors.get(i).getRole() == null || instructors.get(i).getRole().getId() != 2)
+				instructors.remove(i);
+		model.addObject("allInstructor",instructors);
+		model.addObject("allDepartment",departments);
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update Lesson With Submit
+	 * 
+	 */
+	@RequestMapping(value = "/admin/lesson/update/{id}", method = RequestMethod.POST)
+	public ModelAndView lessonUpdateSubmit(@ModelAttribute("updateLesson") Lesson lesson, @PathVariable(value="id") final String id, @RequestParam("departmentId") Integer depId, @RequestParam("instructorId") Integer insId) {
+		
+		if (depId != -1 && insId != -1){
+			lesson.setDepartment(departmentServiceImpl.getById(depId));
+			lesson.setInstructor(userServiceImpl.getById(insId));
+		}
+		lessonServiceImpl.update(lesson);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/lesson");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Delete Lesson
+	 * 
+	 */
+	@RequestMapping(value = "/admin/lesson/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView lessonDelete(@PathVariable(value="id") final String id) {
+		lessonServiceImpl.delete(Integer.parseInt(id));
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/lesson");
+		
+		return model;
+	}
 	
 	
 	

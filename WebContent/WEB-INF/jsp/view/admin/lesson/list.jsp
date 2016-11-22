@@ -49,7 +49,7 @@
 				                        <th><spring:message code="lesson.list.abstract" /></th>
 				                        <th><spring:message code="lesson.list.department" /></th>
 				                        <th><spring:message code="lesson.list.instructor" /></th>
-				                        <th><spring:message code="faculty.list.operation" /></th>
+				                        <th><spring:message code="lesson.list.operation" /></th>
 				                      </tr>
 				                    </thead>
 				                    <tbody id="tbody">
@@ -60,14 +60,14 @@
 					                        <td><c:out value="${lesson.name }" /></td>
 					                        <td><c:out value="${lesson.lessonAbstract }" /></td>
 					                        <td><c:out value="${lesson.department != null ? lesson.department.name : '' }" /></td>
-					                        <td><c:out value="${lesson.instructor != null ? lesson.instructor.name : '' }" /></td>
+					                        <td><c:out value="${lesson.instructor != null ? lesson.instructor.name.concat(' ').concat(lesson.instructor.surname) : '' }" /></td>
 					                        <td><a class="btn btn-sm btn-info" href="${ updateUrl.concat(lesson.id) }"><spring:message code="lesson.list.updateButton" /></a> 
 					                        <a class="btn btn-sm btn-danger" href="${ deleteUrl.concat(lesson.id) }"><spring:message code="lesson.list.deleteButton" /></a> </td>
 					                      </tr>
 									  </c:forEach>
 									  <c:if test="${ empty lessonList}">
 									  	<tr>
-									  		<td colspan="3" align="center">
+									  		<td colspan="7" align="center">
 									  			<b><spring:message code="error.recordsNotFound" /></b>
 									  		</td>
 									  	</tr>
