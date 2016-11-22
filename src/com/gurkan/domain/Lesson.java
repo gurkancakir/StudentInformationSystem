@@ -26,10 +26,10 @@ public class Lesson {
 	private String lessonAbstract;
 	private String code;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.REFRESH)
 	private User instructor;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.REFRESH)
 	private Department department;
 	
 	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Season.class)

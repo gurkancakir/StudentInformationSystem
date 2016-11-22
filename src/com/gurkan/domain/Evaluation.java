@@ -17,7 +17,7 @@ public class Evaluation {
 	private String value;
 	private byte percent;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.REFRESH)
 	private UserLesson userLesson;
 	
 	public Evaluation() {
