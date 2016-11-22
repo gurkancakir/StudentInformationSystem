@@ -32,8 +32,8 @@ public class User{
 	
 
 	//@ManyToOne(cascade= CascadeType.ALL)
-	@ManyToOne(cascade= CascadeType.REFRESH)
-	@JoinColumn(name = "roleId")
+	@ManyToOne
+	@JoinColumn(name = "roleId", insertable = true, updatable = true, nullable=true)
 	private Role role;
 	
 	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)

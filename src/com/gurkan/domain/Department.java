@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,13 +21,12 @@ public class Department {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="department_id")
 	private int id;
 	private String name;
 	
 
-	@ManyToOne(cascade= CascadeType.REFRESH)
-	@JoinColumn(name = "facultyId")
+	@ManyToOne
+	@JoinColumn(name = "facultyId", insertable = true, updatable = true, nullable=true)
 	private Faculty faculty;
 	
 	@OneToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
@@ -75,6 +75,11 @@ public class Department {
 
 	public void setDepartmentRecord(Set departmentRecord) {
 		this.departmentRecord = departmentRecord;
+	}
+	
+	@Override
+	public String toString() {
+		return "Department[ id="+id+", name="+name+", faculty="+faculty+"]";
 	}
 		
 	

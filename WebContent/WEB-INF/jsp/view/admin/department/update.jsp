@@ -39,7 +39,7 @@
 											<option value="-1"><spring:message code="dropdown.default" /></option>
 											 <c:forEach var="faculty" items="${allFaculty}">
 											 	<c:choose>
-												  <c:when test="${updateDepartment.faculty.id ==faculty.id}">
+												  <c:when test="${updateDepartment.faculty != null && updateDepartment.faculty.id == faculty.id}">
 											 		<option selected value="<c:out value='${faculty.id }' />"><c:out value="${faculty.name}"></c:out></option>
 												  </c:when>    
 												  <c:otherwise>

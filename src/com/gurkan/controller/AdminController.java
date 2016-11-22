@@ -109,6 +109,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/admin/faculty/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView facultyDelete(@PathVariable(value="id") final String id) {
+		
 		facultyServiceImpl.delete(Integer.parseInt(id));
 		ModelAndView model = new ModelAndView();
 		model.setViewName("redirect:/admin/faculty");
@@ -215,7 +216,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/department/update/{id}", method = RequestMethod.GET)
 	public ModelAndView departmentUpdate(@PathVariable(value="id") final String id) {
 	    Department department = departmentServiceImpl.getById(Integer.parseInt(id));
-	    
+	    System.out.println(department+" "+id+" "+Integer.parseInt(id));
 		ModelAndView model = new ModelAndView();
 		model.setViewName("view/admin/department/update");
 		model.addObject("updateDepartment", department);
@@ -232,9 +233,12 @@ public class AdminController {
 	 * 
 	 */
 	@RequestMapping(value = "/admin/department/update/{id}", method = RequestMethod.POST)
-	public ModelAndView departmentUpdateSubmit(@ModelAttribute("updateDepartment") Department department, @PathVariable(value="id") final String id) {
+	public ModelAndView departmentUpdateSubmit(@ModelAttribute("updateDepartment") Department department, @PathVariable(value="id") final String id, @RequestParam("facultyId") Integer facultyId) {
 		
+		//departmentServiceImpl.update(department);
+		department.setFaculty(facultyServiceImpl.getById(facultyId));
 		departmentServiceImpl.update(department);
+		
 		ModelAndView model = new ModelAndView();
 		model.setViewName("redirect:/admin/department");
 		
