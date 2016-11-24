@@ -1,26 +1,20 @@
 package com.gurkan.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
+import com.gurkan.domain.*;
+import com.gurkan.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.gurkan.domain.Department;
-import com.gurkan.domain.Faculty;
-import com.gurkan.domain.Lesson;
-import com.gurkan.domain.Role;
-import com.gurkan.domain.User;
-import com.gurkan.service.DepartmentServiceImpl;
-import com.gurkan.service.FacultyServiceImpl;
-import com.gurkan.service.LessonServiceImpl;
-import com.gurkan.service.RoleServiceImpl;
-import com.gurkan.service.UserServiceImpl;
 
 @Controller
 public class AdminController {
@@ -39,6 +33,9 @@ public class AdminController {
 	
 	@Autowired
 	private LessonServiceImpl lessonServiceImpl;
+
+	@Autowired
+	private SeasonServiceImpl seasonServiceImpl;
 	
     private int recordsPerPage = 10;
 	
@@ -406,11 +403,15 @@ public class AdminController {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("view/admin/lesson/add");
 
+		List<Season> seasons = seasonServiceImpl.getAll();
 		List<Department> departments = departmentServiceImpl.getAll();
 		List<User> instructors = userServiceImpl.getAll();
+		
 		for(int i=0; i< instructors.size(); i++)
 			if (instructors.get(i).getRole() == null || instructors.get(i).getRole().getId() != 2)
 				instructors.remove(i);
+		
+		model.addObject("allSeason", seasons);
 		model.addObject("allInstructor",instructors);
 		model.addObject("allDepartment",departments);
 		model.addObject("newLesson", new Lesson());
@@ -423,11 +424,12 @@ public class AdminController {
 	 * 
 	 */
 	@RequestMapping(value = "/admin/lesson/add", method = RequestMethod.POST)
-	public ModelAndView lessonAddSubmit(@ModelAttribute("newLesson") Lesson lesson, @RequestParam("departmentId") Integer depId, @RequestParam("instructorId") Integer insId) {
+	public ModelAndView lessonAddSubmit(@ModelAttribute("newLesson") Lesson lesson, @RequestParam("departmentId") Integer depId, @RequestParam("instructorId") Integer insId, @RequestParam("seasonId") Integer seasonId) {
 		
-		if (depId != -1 && insId != -1){
+		if (depId != -1 && insId != -1 && seasonId != -1){
 			lesson.setDepartment(departmentServiceImpl.getById(depId));
 			lesson.setInstructor(userServiceImpl.getById(insId));
+			lesson.setSeason(seasonServiceImpl.getById(seasonId));
 		}
 		lessonServiceImpl.insert(lesson);
 		
@@ -491,8 +493,121 @@ public class AdminController {
 		
 		return model;
 	}
+
+	/*
+	 * Task : Season List Page With Pagination
+	 *
+	 */
+	@RequestMapping(value = "/admin/season", method = RequestMethod.GET)
+	public ModelAndView seasonList(@RequestParam(value="page", required=false) Integer page) {
+
+		page = (page != null) ? page : 1;
+		int totalSize = seasonServiceImpl.getAll().size();
+		int totalPage =  0;
+		if (totalSize % recordsPerPage == 0)
+			totalPage = totalSize / recordsPerPage;
+		else
+			totalPage = totalSize / recordsPerPage +1;
+		List<Season> list = seasonServiceImpl.getAllWithPagination((page-1)*recordsPerPage, recordsPerPage);
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/season/list");
+		model.addObject("seasonList", list);
+		model.addObject("totalPage", totalPage);
+		model.addObject("currentPage", page);
+
+		return model;
+	}
+
+	/*
+	 * Task : Season Add Page
+	 *
+	 */
+	@RequestMapping(value = "/admin/season/add", method = RequestMethod.GET)
+	public ModelAndView seasonAdd() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/season/add");
+
+		model.addObject("newSeason", new Season());
+
+		return model;
+	}
+
+	/*
+	 * Task : Season Add Page With Submit
+	 *
+	 */
+	@RequestMapping(value = "/admin/season/add", method = RequestMethod.POST)
+	public ModelAndView seasonAddSubmit(@ModelAttribute("newSeason") @Validated Season season, BindingResult result) {
+
+		ModelAndView model = new ModelAndView();
+		
+		if (result.hasErrors()) {
+			System.out.println(result.getFieldError().getDefaultMessage());
+		}else {
+
+			seasonServiceImpl.insert(season);
+			model.setViewName("redirect:/admin/season");
+		}
+
+		return model;
+	}
+
+	/*
+	*  Datetime formatini formdan nasil tasiyacagi
+	* */
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+		sdf.setLenient(true);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	}
 	
 	
+	/*
+	 * Task : Update Season
+	 * 
+	 */
+	@RequestMapping(value = "/admin/season/update/{id}", method = RequestMethod.GET)
+	public ModelAndView seasonUpdate(@PathVariable(value="id") final String id) {
+	    Season season = seasonServiceImpl.getById(Integer.parseInt(id));
+	    
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/season/update");
+		model.addObject("updateSeason", season);
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update Season With Submit
+	 * 
+	 */
+	@RequestMapping(value = "/admin/season/update/{id}", method = RequestMethod.POST)
+	public ModelAndView seasonUpdateSubmit(@ModelAttribute("updateSeason") Season season ) {
+		
+		seasonServiceImpl.update(season);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/season");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Delete Season
+	 * 
+	 */
+	@RequestMapping(value = "/admin/season/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView seasonDelete(@PathVariable(value="id") final String id) {
+		
+		seasonServiceImpl.delete(Integer.parseInt(id));
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/season");
+		
+		return model;
+	}
 	
 	
 }

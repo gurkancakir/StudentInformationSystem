@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Season {
@@ -21,16 +24,22 @@ public class Season {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
+	
+	@Column(name = "startDate", columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
+	
+	@Column(name = "endDate", columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
 	
-	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
-    @JoinTable(name = "season_lesson",
-    joinColumns = {
-        @JoinColumn(name = "season")},
-    inverseJoinColumns = {
-        @JoinColumn(name = "lesson")})
-	private Set lessons = new HashSet();
+//	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
+//    @JoinTable(name = "season_lesson",
+//    joinColumns = {
+//        @JoinColumn(name = "season")},
+//    inverseJoinColumns = {
+//        @JoinColumn(name = "lesson")})
+//	private Set lessons = new HashSet();
 	
 	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
     @JoinTable(name = "season_userlesson",
@@ -83,13 +92,13 @@ public class Season {
 		this.endDate = endDate;
 	}
 
-	public Set getLessons() {
-		return lessons;
-	}
-
-	public void setLessons(Set lessons) {
-		this.lessons = lessons;
-	}
+//	public Set getLessons() {
+//		return lessons;
+//	}
+//
+//	public void setLessons(Set lessons) {
+//		this.lessons = lessons;
+//	}
 
 	public Set getUserLessons() {
 		return userLessons;

@@ -5,7 +5,6 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ taglib prefix="template" tagdir="/WEB-INF/tags" %>
 
 <!DOCTYPE html>
 <html class="app js no-touch no-android no-chrome firefox no-iemobile no-ie no-ie10 no-ie11 no-ios">
@@ -49,25 +48,31 @@
 				                        <th><spring:message code="lesson.list.abstract" /></th>
 				                        <th><spring:message code="lesson.list.department" /></th>
 				                        <th><spring:message code="lesson.list.instructor" /></th>
+										<th><spring:message code="lesson.list.ects" /></th>
+										<th><spring:message code="lesson.list.credit" /></th>
 				                        <th><spring:message code="lesson.list.operation" /></th>
 				                      </tr>
 				                    </thead>
 				                    <tbody id="tbody">
 				                      <c:forEach var="lesson" items="${lessonList}">
 									      <tr>
-					                        <td><c:out value="${lesson.id }" /></td>
-					                        <td><c:out value="${lesson.code }" /></td>
-					                        <td><c:out value="${lesson.name }" /></td>
-					                        <td><c:out value="${lesson.lessonAbstract }" /></td>
-					                        <td><c:out value="${lesson.department != null ? lesson.department.name : '' }" /></td>
-					                        <td><c:out value="${lesson.instructor != null ? lesson.instructor.name.concat(' ').concat(lesson.instructor.surname) : '' }" /></td>
-					                        <td><a class="btn btn-sm btn-info" href="${ updateUrl.concat(lesson.id) }"><spring:message code="lesson.list.updateButton" /></a> 
-					                        <a class="btn btn-sm btn-danger" href="${ deleteUrl.concat(lesson.id) }"><spring:message code="lesson.list.deleteButton" /></a> </td>
+                                              <td><c:out value="${lesson.id }" /></td>
+                                              <td><c:out value="${lesson.code }" /></td>
+                                              <td><c:out value="${lesson.name }" /></td>
+                                              <td><c:out value="${lesson.lessonAbstract }" /></td>
+                                              <td><c:out value="${lesson.department != null ? lesson.department.name : '' }" /></td>
+                                              <td><c:out value="${lesson.instructor != null ? lesson.instructor.name.concat(' ').concat(lesson.instructor.surname) : '' }" /></td>
+                                              <td><c:out value="${lesson.ects }" /></td>
+											  <td><c:out value="${lesson.credit }" /></td>
+											  <td>
+												  <a class="btn btn-sm btn-info" href="${ updateUrl.concat(lesson.id) }"><spring:message code="lesson.list.updateButton" /></a>
+												  <a class="btn btn-sm btn-danger" href="${ deleteUrl.concat(lesson.id) }"><spring:message code="lesson.list.deleteButton" /></a>
+											  </td>
 					                      </tr>
 									  </c:forEach>
 									  <c:if test="${ empty lessonList}">
 									  	<tr>
-									  		<td colspan="7" align="center">
+									  		<td colspan="9" align="center">
 									  			<b><spring:message code="error.recordsNotFound" /></b>
 									  		</td>
 									  	</tr>

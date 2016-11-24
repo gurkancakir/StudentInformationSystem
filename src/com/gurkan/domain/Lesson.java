@@ -35,13 +35,17 @@ public class Lesson {
 	@JoinColumn(name = "departmentId", insertable = true, updatable = true, nullable=true)
 	private Department department;
 	
-	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Season.class)
-    @JoinTable(name = "season_lesson",
-    joinColumns = {
-        @JoinColumn(name = "lesson")},
-    inverseJoinColumns = {
-        @JoinColumn(name = "season")})
-	private Set seasons = new HashSet();
+	@ManyToOne
+	@JoinColumn(name = "seasonId", insertable = true, updatable = true, nullable=true)
+	private Season season;
+	
+//	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Season.class)
+//    @JoinTable(name = "season_lesson",
+//    joinColumns = {
+//        @JoinColumn(name = "lesson")},
+//    inverseJoinColumns = {
+//        @JoinColumn(name = "season")})
+//	private Set seasons = new HashSet();
 	
 	
 	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Season.class)
@@ -120,13 +124,13 @@ public class Lesson {
 		this.department = department;
 	}
 
-	public Set getSeasons() {
-		return seasons;
-	}
-
-	public void setSeasons(Set seasons) {
-		this.seasons = seasons;
-	}
+//	public Set getSeasons() {
+//		return seasons;
+//	}
+//
+//	public void setSeasons(Set seasons) {
+//		this.seasons = seasons;
+//	}
 
 	public Set getUserLessons() {
 		return userLessons;
@@ -142,6 +146,14 @@ public class Lesson {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public Season getSeason() {
+		return season;
+	}
+
+	public void setSeason(Season season) {
+		this.season = season;
 	}
 	
 	

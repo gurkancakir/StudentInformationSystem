@@ -5,7 +5,6 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ taglib prefix="template" tagdir="/WEB-INF/tags" %>
 
 <!DOCTYPE html>
 <html class="app js no-touch no-android no-chrome firefox no-iemobile no-ie no-ie10 no-ie11 no-ios">
