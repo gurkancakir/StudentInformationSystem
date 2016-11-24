@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gurkan.domain.Department;
+import com.gurkan.domain.Lesson;
 import com.gurkan.domain.Season;
 
 @Repository
@@ -58,6 +60,10 @@ public class SeasonDAOImpl implements ModelDAO<Season>{
 		Season s = session.get(Season.class, id);
 		System.out.println(s);
 		if (s != null){
+			//donemdeki derslerle iliskisinin null yapilmasi
+			for (Lesson lesson : session.createQuery("from Lesson",Lesson.class).getResultList())
+				if (lesson.getSeason() != null && lesson.getSeason().getId() == s.getId())
+					lesson.setSeason(null);
 			session.delete(s);
 		}
 	}
