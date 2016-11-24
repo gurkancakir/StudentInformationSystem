@@ -403,11 +403,15 @@ public class AdminController {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("view/admin/lesson/add");
 
+		List<Season> seasons = seasonServiceImpl.getAll();
 		List<Department> departments = departmentServiceImpl.getAll();
 		List<User> instructors = userServiceImpl.getAll();
+		
 		for(int i=0; i< instructors.size(); i++)
 			if (instructors.get(i).getRole() == null || instructors.get(i).getRole().getId() != 2)
 				instructors.remove(i);
+		
+		model.addObject("allSeason", seasons);
 		model.addObject("allInstructor",instructors);
 		model.addObject("allDepartment",departments);
 		model.addObject("newLesson", new Lesson());
@@ -420,11 +424,12 @@ public class AdminController {
 	 * 
 	 */
 	@RequestMapping(value = "/admin/lesson/add", method = RequestMethod.POST)
-	public ModelAndView lessonAddSubmit(@ModelAttribute("newLesson") Lesson lesson, @RequestParam("departmentId") Integer depId, @RequestParam("instructorId") Integer insId) {
+	public ModelAndView lessonAddSubmit(@ModelAttribute("newLesson") Lesson lesson, @RequestParam("departmentId") Integer depId, @RequestParam("instructorId") Integer insId, @RequestParam("seasonId") Integer seasonId) {
 		
-		if (depId != -1 && insId != -1){
+		if (depId != -1 && insId != -1 && seasonId != -1){
 			lesson.setDepartment(departmentServiceImpl.getById(depId));
 			lesson.setInstructor(userServiceImpl.getById(insId));
+			lesson.setSeason(seasonServiceImpl.getById(seasonId));
 		}
 		lessonServiceImpl.insert(lesson);
 		

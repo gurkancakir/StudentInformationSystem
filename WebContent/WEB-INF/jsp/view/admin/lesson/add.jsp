@@ -42,6 +42,15 @@
 											  <label><spring:message code="lesson.add.name" /></label>
 											  <form:input id="name" path="name" name="name" type="text" class="form-control"/>
 										  </div>
+										  <div class="col-md-12">
+											<label><spring:message code="lesson.add.season" /></label>
+											<select class="form-control" id="seasonId" name="seasonId">
+												<option value="-1"><spring:message code="dropdown.default" /></option>
+												 <c:forEach var="season" items="${allSeason}">
+													<option value="<c:out value='${season.id }' />"><c:out value="${season.title}"></c:out></option>
+												 </c:forEach>
+											</select>
+										</div>
 										<div class="col-md-12">
 											<label><spring:message code="lesson.add.department" /></label>
 											<select class="form-control" id="departmentId" name="departmentId">
