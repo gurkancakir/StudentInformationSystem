@@ -7,3 +7,6 @@
 <script src="resources/js/app.plugin.js"></script>
 <script src="resources/js/jquery.slimscroll.min.js"></script>
 <script src="resources/js/jquery.dataTables.min.js"></script>
+<script src="resources/js/bootstrap-datepicker.js"></script>
+<script src="resources/js/moment.min.js"></script>
+<script src="resources/js/combodate.js"></script>

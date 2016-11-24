@@ -9,10 +9,10 @@
 <!DOCTYPE html>
 <html class="app js no-touch no-android no-chrome firefox no-iemobile no-ie no-ie10 no-ie11 no-ios">
 
-<spring:message var="department" code="leftmenu.admin.department.list" />
-<template:header title="${ department }"></template:header>
+<spring:message var="season" code="leftmenu.admin.season.list" />
+<template:header title="${ season }"></template:header>
 
-<c:url var="actionURL" value="/admin/department/add"/>
+<c:url var="actionURL" value="/admin/season/add"/>
 <body>
 <section class="vbox">
 	<template:top_menu></template:top_menu>
@@ -25,28 +25,30 @@
             			<div class="content padder">
             				<div class="row">
 			                <div class="col-sm-12">
-			                  <form:form modelAttribute="newDepartment" class="form-horizontal" method="post" action="${actionUrl}">
+			                  <form:form modelAttribute="newSeason" class="form-horizontal" method="post" action="${actionUrl}">
 								<fieldset>
 				                    <section class="panel panel-default">
 				                      <header class="panel-heading">
-				                        <span class="h4"><spring:message code="department.add" /></span>
+				                        <span class="h4"><spring:message code="season.add" /></span>
 				                      </header>
 				                      <div class="panel-body">
-				                        <p class="text-muted"><spring:message code="department.add.inf" /></p>
-				                        <label><spring:message code="department.add.faculty.name" /></label>
-<%-- 				                        <form:select path="faculty" items="${allFaculty}" itemLabel="name" itemValue="id" class="form-control"/> --%>
-										<select class="form-control" id="facultyId" name="facultyId">
-											<option value="-1"><spring:message code="dropdown.default" /></option>
-											 <c:forEach var="faculty" items="${allFaculty}">
-											 	<option value="<c:out value='${faculty.id }' />"><c:out value="${faculty.name}"></c:out></option>
-											 </c:forEach>
-										</select>
-				                        <label><spring:message code="department.add.name" /></label>
-				                        <form:hidden path="id"/>
-				                        <form:input id="name" path="name" name="name" type="text" class="form-control"/>
+										  <p class="text-muted"><spring:message code="season.add.inf" /></p>
+										  <form:hidden path="id"/>
+										  <div class="col-md-12">
+											  <label><spring:message code="season.add.title" /></label>
+											  <form:input id="title" path="title" name="title" type="text" class="form-control"/>
+										  </div>
+										  <div class="col-md-12">
+											  <label><spring:message code="season.add.startDate" /></label>
+											  <form:input name="startDate" id="startDate" path="startDate" type="text" class="form-control" />
+										  </div>
+										  <div class="col-md-12">
+											  <label><spring:message code="season.add.endDate" /></label>
+											  <form:input name="endDate" id="endDate" path="endDate" type="text" class="form-control"/>
+										  </div>
 				                      </div>
 				                      <footer class="panel-footer text-right bg-light lter">
-				                        <button type="submit" class="btn btn-success btn-s-xs"><spring:message code="department.add.submit" />
+				                        <button type="submit" class="btn btn-success btn-s-xs"><spring:message code="season.add.submit" />
 				                      </footer>
 				                    </section>
 			                  </fieldset>

@@ -22,5 +22,6 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="resources/css/font.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="resources/css/app.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="resources/css/datatables.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="resources/css/datepicker.css" />
 
 </head>

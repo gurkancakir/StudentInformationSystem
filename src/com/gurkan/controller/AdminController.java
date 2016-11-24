@@ -1,26 +1,18 @@
 package com.gurkan.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
+import com.gurkan.domain.*;
+import com.gurkan.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.gurkan.domain.Department;
-import com.gurkan.domain.Faculty;
-import com.gurkan.domain.Lesson;
-import com.gurkan.domain.Role;
-import com.gurkan.domain.User;
-import com.gurkan.service.DepartmentServiceImpl;
-import com.gurkan.service.FacultyServiceImpl;
-import com.gurkan.service.LessonServiceImpl;
-import com.gurkan.service.RoleServiceImpl;
-import com.gurkan.service.UserServiceImpl;
 
 @Controller
 public class AdminController {
@@ -39,6 +31,9 @@ public class AdminController {
 	
 	@Autowired
 	private LessonServiceImpl lessonServiceImpl;
+
+	@Autowired
+	private SeasonServiceImpl seasonServiceImpl;
 	
     private int recordsPerPage = 10;
 	
@@ -491,8 +486,72 @@ public class AdminController {
 		
 		return model;
 	}
-	
-	
+
+	/*
+	 * Task : Season List Page With Pagination
+	 *
+	 */
+	@RequestMapping(value = "/admin/season", method = RequestMethod.GET)
+	public ModelAndView seasonList(@RequestParam(value="page", required=false) Integer page) {
+
+		page = (page != null) ? page : 1;
+		int totalSize = seasonServiceImpl.getAll().size();
+		int totalPage =  0;
+		if (totalSize % recordsPerPage == 0)
+			totalPage = totalSize / recordsPerPage;
+		else
+			totalPage = totalSize / recordsPerPage +1;
+		List<Season> list = seasonServiceImpl.getAllWithPagination((page-1)*recordsPerPage, recordsPerPage);
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/season/list");
+		model.addObject("seasonList", list);
+		model.addObject("totalPage", totalPage);
+		model.addObject("currentPage", page);
+
+		return model;
+	}
+
+	/*
+	 * Task : Season Add Page
+	 *
+	 */
+	@RequestMapping(value = "/admin/season/add", method = RequestMethod.GET)
+	public ModelAndView seasonAdd() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/season/add");
+
+		model.addObject("newSeason", new Season());
+
+		return model;
+	}
+
+	/*
+	 * Task : Season Add Page With Submit
+	 *
+	 */
+	@RequestMapping(value = "/admin/season/add", method = RequestMethod.POST)
+	public ModelAndView seasonAddSubmit(@ModelAttribute("newSeason") Season season) {
+
+		seasonServiceImpl.insert(season);
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/season");
+
+		return model;
+	}
+
+	//TODO: Datetime ile ilgili duzenleme yapilacak (season add isleminde)
+
+	/*
+	*  Datetime formatini formdan nasil tasiyacagi
+	* */
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat sdf = new SimpleDateFormat("DD.MM.YYYY HH:mm");
+		sdf.setLenient(true);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	}
 	
 	
 }
