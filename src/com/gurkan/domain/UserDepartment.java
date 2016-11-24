@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -19,11 +21,14 @@ public class UserDepartment {
 	private Date startDate;
 	private Date endDate;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "userId", insertable = true, updatable = true, nullable=true)
 	private User user;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "departmentId", insertable = true, updatable = true, nullable=true)
 	private Department department;
+	
 	
 	public UserDepartment() {
 		super();

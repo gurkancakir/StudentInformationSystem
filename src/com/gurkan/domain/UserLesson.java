@@ -21,13 +21,16 @@ public class UserLesson {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name = "userId", insertable = true, updatable = true, nullable=true)
 	private User user;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name = "lessonId", insertable = true, updatable = true, nullable=true)
 	private Lesson lesson;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name = "seasonId", insertable = true, updatable = true, nullable=true)
 	private Season season;
 	
 	
