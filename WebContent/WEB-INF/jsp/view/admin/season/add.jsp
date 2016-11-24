@@ -38,11 +38,11 @@
 											  <label><spring:message code="season.add.title" /></label>
 											  <form:input id="title" path="title" name="title" type="text" class="form-control"/>
 										  </div>
-										  <div class="col-md-12">
+										  <div class="col-md-6">
 											  <label><spring:message code="season.add.startDate" /></label>
 											  <form:input name="startDate" id="startDate" path="startDate" type="text" class="form-control combodate" data-format="DD.MM.YYYY HH:mm:ss" data-template="DD MMM YYYY HH : mm : ss" />
 										  </div>
-										  <div class="col-md-12">
+										  <div class="col-md-6">
 											  <label><spring:message code="season.add.endDate" /></label>
 											  <form:input name="endDate" id="endDate" path="endDate" type="text" class="form-control combodate" data-format="DD.MM.YYYY HH:mm:ss" data-template="DD MMM YYYY HH : mm : ss" />
 										  </div>

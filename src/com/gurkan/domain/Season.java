@@ -33,13 +33,13 @@ public class Season {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
 	
-	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
-    @JoinTable(name = "season_lesson",
-    joinColumns = {
-        @JoinColumn(name = "season")},
-    inverseJoinColumns = {
-        @JoinColumn(name = "lesson")})
-	private Set lessons = new HashSet();
+//	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
+//    @JoinTable(name = "season_lesson",
+//    joinColumns = {
+//        @JoinColumn(name = "season")},
+//    inverseJoinColumns = {
+//        @JoinColumn(name = "lesson")})
+//	private Set lessons = new HashSet();
 	
 	@ManyToMany(cascade= CascadeType.ALL,  fetch = FetchType.EAGER, targetEntity = Lesson.class)
     @JoinTable(name = "season_userlesson",
@@ -92,13 +92,13 @@ public class Season {
 		this.endDate = endDate;
 	}
 
-	public Set getLessons() {
-		return lessons;
-	}
-
-	public void setLessons(Set lessons) {
-		this.lessons = lessons;
-	}
+//	public Set getLessons() {
+//		return lessons;
+//	}
+//
+//	public void setLessons(Set lessons) {
+//		this.lessons = lessons;
+//	}
 
 	public Set getUserLessons() {
 		return userLessons;

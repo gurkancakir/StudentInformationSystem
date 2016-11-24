@@ -596,7 +596,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/season/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView seasonDelete(@PathVariable(value="id") final String id) {
 		
-		lessonServiceImpl.delete(Integer.parseInt(id));
+		seasonServiceImpl.delete(Integer.parseInt(id));
 		
 		ModelAndView model = new ModelAndView();
 		model.setViewName("redirect:/admin/season");
