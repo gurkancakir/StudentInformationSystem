@@ -10,6 +10,8 @@ import com.gurkan.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -531,17 +533,20 @@ public class AdminController {
 	 *
 	 */
 	@RequestMapping(value = "/admin/season/add", method = RequestMethod.POST)
-	public ModelAndView seasonAddSubmit(@ModelAttribute("newSeason") Season season) {
-
-		seasonServiceImpl.insert(season);
+	public ModelAndView seasonAddSubmit(@ModelAttribute("newSeason") @Validated Season season, BindingResult result) {
 
 		ModelAndView model = new ModelAndView();
-		model.setViewName("redirect:/admin/season");
+		
+		if (result.hasErrors()) {
+			System.out.println(result.getFieldError().getDefaultMessage());
+		}else {
+
+			seasonServiceImpl.insert(season);
+			model.setViewName("redirect:/admin/season");
+		}
 
 		return model;
 	}
-
-	//TODO: Datetime ile ilgili duzenleme yapilacak (season add isleminde)
 
 	/*
 	*  Datetime formatini formdan nasil tasiyacagi
@@ -551,6 +556,52 @@ public class AdminController {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 		sdf.setLenient(true);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	}
+	
+	
+	/*
+	 * Task : Update Season
+	 * 
+	 */
+	@RequestMapping(value = "/admin/season/update/{id}", method = RequestMethod.GET)
+	public ModelAndView seasonUpdate(@PathVariable(value="id") final String id) {
+	    Season season = seasonServiceImpl.getById(Integer.parseInt(id));
+	    
+		ModelAndView model = new ModelAndView();
+		model.setViewName("view/admin/season/update");
+		model.addObject("updateSeason", season);
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Update Season With Submit
+	 * 
+	 */
+	@RequestMapping(value = "/admin/season/update/{id}", method = RequestMethod.POST)
+	public ModelAndView seasonUpdateSubmit(@ModelAttribute("updateSeason") Season season ) {
+		
+		seasonServiceImpl.update(season);
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/season");
+		
+		return model;
+	}
+	
+	/*
+	 * Task : Delete Season
+	 * 
+	 */
+	@RequestMapping(value = "/admin/season/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView seasonDelete(@PathVariable(value="id") final String id) {
+		
+		lessonServiceImpl.delete(Integer.parseInt(id));
+		
+		ModelAndView model = new ModelAndView();
+		model.setViewName("redirect:/admin/season");
+		
+		return model;
 	}
 	
 	
