@@ -40,11 +40,11 @@
 										  </div>
 										  <div class="col-md-12">
 											  <label><spring:message code="season.add.startDate" /></label>
-											  <form:input name="startDate" id="startDate" path="startDate" type="text" class="form-control" />
+											  <form:input name="startDate" id="startDate" path="startDate" type="text" class="form-control" placeholder="01.12.2011 11:30:00" />
 										  </div>
 										  <div class="col-md-12">
 											  <label><spring:message code="season.add.endDate" /></label>
-											  <form:input name="endDate" id="endDate" path="endDate" type="text" class="form-control"/>
+											  <form:input name="endDate" id="endDate" path="endDate" type="text" class="form-control" placeholder="01.12.2012 11:30:00" />
 										  </div>
 				                      </div>
 				                      <footer class="panel-footer text-right bg-light lter">

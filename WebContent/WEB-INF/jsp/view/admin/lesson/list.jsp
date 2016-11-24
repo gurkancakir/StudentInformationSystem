@@ -72,7 +72,7 @@
 									  </c:forEach>
 									  <c:if test="${ empty lessonList}">
 									  	<tr>
-									  		<td colspan="7" align="center">
+									  		<td colspan="9" align="center">
 									  			<b><spring:message code="error.recordsNotFound" /></b>
 									  		</td>
 									  	</tr>
