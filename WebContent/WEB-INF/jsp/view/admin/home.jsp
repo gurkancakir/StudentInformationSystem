@@ -23,7 +23,59 @@
 				<jsp:attribute name="content">
 					<section class="vbox">
             			<section class="scrollable padder">
-            				Admin Home
+            				<br />
+            				<div class="row">
+            				  <!-- Donem -->
+							  <div class="col-xs-6 col-sm-6 col-md-3">
+							    <a href="#" class="thumbnail text-center bg-danger">
+							      <i class="fa fa-book" style="font-size: 25em !important;"></i>
+							    </a>
+							  </div>
+							  <!-- Fakulte -->
+							  <div class="col-xs-6 col-sm-6 col-md-3">
+							    <a href="#" class="thumbnail text-center bg-info">
+							      <i class="fa fa-columns icon" style="font-size: 25em !important;"></i>
+							    </a>
+							  </div>
+							  <!-- Bolum -->
+							  <div class="col-xs-6 col-sm-6 col-md-3">
+							    <a href="#" class="thumbnail text-center bg-default">
+							      <i class="fa fa-columns icon" style="font-size: 25em !important;"></i>
+							    </a>
+							  </div>
+							  <!-- Ders -->
+							  <div class="col-xs-6 col-sm-6 col-md-3">
+							    <a href="#" class="thumbnail text-center bg-warning">
+							      <i class="fa fa-columns icon" style="font-size: 25em !important;"></i>
+							    </a>
+							  </div>							  
+							</div>
+							<div class="row">
+            				  <!-- Donem -->
+							  <div class="col-xs-6 col-sm-6 col-md-3">
+							    <a href="#" class="thumbnail text-center bg-danger">
+							      <i class="fa fa-book" style="font-size: 25em !important;"></i>
+							    </a>
+							  </div>
+							  <!-- Fakulte -->
+							  <div class="col-xs-6 col-sm-6 col-md-3">
+							    <a href="#" class="thumbnail text-center bg-info">
+							      <i class="fa fa-columns icon" style="font-size: 25em !important;"></i>
+							    </a>
+							  </div>
+							  <!-- Bolum -->
+							  <div class="col-xs-6 col-sm-6 col-md-3">
+							    <a href="#" class="thumbnail text-center bg-default">
+							      <i class="fa fa-columns icon" style="font-size: 25em !important;"></i>
+							    </a>
+							  </div>
+							  <!-- Ders -->
+							  <div class="col-xs-6 col-sm-6 col-md-3">
+							    <a href="#" class="thumbnail text-center bg-warning">
+							      <i class="fa fa-columns icon" style="font-size: 25em !important;"></i>
+							    </a>
+							  </div>							  
+							</div>
             			</section>
             		</section>
 				</jsp:attribute>
