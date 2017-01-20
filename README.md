@@ -1,5 +1,5 @@
 # StudentInformationSystem
 
-![Login](screenhot/login.png)
-![Department](screenhot/department.png)
-![Menu](screenhot/department2.png)
+![](https://raw.githubusercontent.com/gurkancakir/StudentInformationSystem/master/screenshot/login.png)
+![](https://raw.githubusercontent.com/gurkancakir/StudentInformationSystem/master/screenshot/department.png)
+![](https://raw.githubusercontent.com/gurkancakir/StudentInformationSystem/master/screenshot/department2.png)
